@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Creative Developer Portfolio",
-  description: "A modern, high-end creative developer portfolio showcasing selected projects and experiments.",
+  title: "Mathis Rivière - Portfolio",
+  description: "Mathis Rivière - Portfolio",
 };
 
 export default function RootLayout({
