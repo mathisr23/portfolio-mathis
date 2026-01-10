@@ -13,7 +13,7 @@ export default function NavItem({ label, index }: NavItemProps) {
             case "about":
                 return "/about";
             case "work":
-                return "/";
+                return "/#work";
             case "contact":
                 return "/contact";
             default:

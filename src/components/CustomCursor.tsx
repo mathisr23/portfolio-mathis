@@ -14,7 +14,10 @@ export default function CustomCursor() {
       setIsVisible(true);
     };
 
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseEnter = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      setIsVisible(true);
+    };
     const handleMouseLeave = () => setIsVisible(false);
 
     const handleHoverStart = (e: MouseEvent) => {
@@ -33,14 +36,14 @@ export default function CustomCursor() {
     const handleHoverEnd = () => setIsHovering(false);
 
     window.addEventListener("mousemove", updatePosition);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseenter", handleMouseEnter as any);
     document.addEventListener("mouseleave", handleMouseLeave);
     document.addEventListener("mouseover", handleHoverStart);
     document.addEventListener("mouseout", handleHoverEnd);
 
     return () => {
       window.removeEventListener("mousemove", updatePosition);
-      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseenter", handleMouseEnter as any);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseover", handleHoverStart);
       document.removeEventListener("mouseout", handleHoverEnd);
