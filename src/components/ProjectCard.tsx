@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface ProjectCardProps {
     title: string;
@@ -26,13 +27,19 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
 
     const content = (
         <div className="aspect-[16/10] overflow-hidden rounded-xl relative">
-            <motion.img
-                src={image}
-                alt={title}
-                className="w-full h-full object-cover rounded-xl"
+            <motion.div
+                className="w-full h-full relative"
                 animate={{ scale: isHovered ? 1.05 : 1 }}
                 transition={{ duration: 0.6 }}
-            />
+            >
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+            </motion.div>
 
             {/* Dark Gradient Overlay - Always visible at bottom for text readability, intensifies on hover */}
             <motion.div

@@ -1,6 +1,7 @@
 "use client";
 
 import ProjectCard from "@/components/ProjectCard";
+import Image from "next/image";
 
 const projects = [
     {
@@ -48,15 +49,15 @@ export default function ProjectsGrid() {
             className="pt-32 pb-32 relative w-full"
         >
             {/* Background Image */}
-            <div
-                className="absolute inset-0 z-0"
-                style={{
-                    backgroundImage: "url('/purple-background-project.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center top",
-                    backgroundRepeat: "no-repeat",
-                }}
-            />
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/purple-background-project.jpg"
+                    alt="Projects Background"
+                    fill
+                    quality={90}
+                    className="object-cover object-top"
+                />
+            </div>
 
             {/* Fade transition from hero - gradient overlay at top */}
             <div

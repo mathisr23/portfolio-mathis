@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
     const scrollToWork = () => {
@@ -13,15 +14,16 @@ export default function Hero() {
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
             {/* Background Image */}
-            <div
-                className="absolute inset-0 z-0"
-                style={{
-                    backgroundImage: "url('/purple-background-hero.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                }}
-            />
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/purple-background-hero.jpg"
+                    alt="Hero Background"
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover"
+                />
+            </div>
 
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 z-0 bg-black/30" />

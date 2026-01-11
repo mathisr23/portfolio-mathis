@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Contact() {
     const [copied, setCopied] = useState(false);
@@ -25,15 +26,15 @@ export default function Contact() {
             className="relative min-h-screen py-20 px-6 flex items-center"
         >
             {/* Background Image */}
-            <div
-                className="absolute inset-0 z-0"
-                style={{
-                    backgroundImage: "url('/contact-background.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                }}
-            />
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/contact-background.jpg"
+                    alt="Contact Background"
+                    fill
+                    quality={90}
+                    className="object-cover"
+                />
+            </div>
 
             {/* Dark overlay for text readability */}
             <div className="absolute inset-0 z-0 bg-black/60" />
