@@ -3,10 +3,11 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import NavItem from "@/components/NavItem";
-
-const navItems = ["Work", "About", "Contact"];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
+    const { t } = useLanguage();
+    const navItems = [t.nav.work, t.nav.about, t.nav.contact];
     const [isHovered, setIsHovered] = useState(false);
     const [mouseXPercent, setMouseXPercent] = useState(50);
     const navRef = useRef<HTMLDivElement>(null);

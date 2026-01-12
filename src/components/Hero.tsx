@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
+    const { t } = useLanguage();
+
     const scrollToWork = () => {
         const workSection = document.getElementById("work");
         if (workSection) {
@@ -47,7 +50,7 @@ export default function Hero() {
                     className="text-[clamp(3rem,12vw,10rem)] font-serif leading-[0.9] tracking-[-0.02em] text-white"
                     style={{ fontFamily: "var(--font-serif)" }}
                 >
-                    All Work
+                    {t.hero.title}
                 </h1>
                 <motion.p
                     initial={{ opacity: 0 }}
@@ -55,7 +58,7 @@ export default function Hero() {
                     transition={{ duration: 0.8, delay: 1 }}
                     className="mt-6 text-white/70 text-lg tracking-wide"
                 >
-                    Selected Projects & Experiments
+                    {t.hero.subtitle}
                 </motion.p>
 
                 {/* Scroll to Work Button */}
@@ -67,7 +70,7 @@ export default function Hero() {
                     className="mt-12 flex flex-col items-center gap-3 mx-auto hoverable group"
                 >
                     <span className="text-white/60 text-sm tracking-widest uppercase group-hover:text-white/90 transition-colors">
-                        View Projects
+                        {t.hero.viewProjects}
                     </span>
                     <motion.div
                         animate={{ y: [0, 8, 0] }}

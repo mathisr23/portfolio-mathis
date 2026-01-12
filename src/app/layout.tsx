@@ -3,6 +3,8 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -31,9 +33,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased bg-[#0a0a0b] text-white`}
       >
-        <CustomCursor />
-        <SmoothScroll />
-        {children}
+        <LanguageProvider>
+          <CustomCursor />
+          <SmoothScroll />
+          <LanguageToggle />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

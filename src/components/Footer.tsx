@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+    const { t } = useLanguage();
+
     return (
         <footer className="relative min-h-[100vh] flex flex-col items-center justify-center px-6">
             {/* Gradient background: black to dark purple */}
@@ -32,9 +35,9 @@ export default function Footer() {
                     className="text-[clamp(2.5rem,8vw,5rem)] font-serif leading-[1.1] tracking-[-0.02em] text-white"
                     style={{ fontFamily: "var(--font-serif)" }}
                 >
-                    Let's build something
+                    {t.footer.titlePart1}
                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-500">
-                        extraordinary
+                        {t.footer.titlePart2}
                     </span>
                 </motion.h2>
 
@@ -45,7 +48,7 @@ export default function Footer() {
                     transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
                     className="mt-6 text-white/60 text-lg max-w-2xl mx-auto"
                 >
-                    Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+                    {t.footer.subtitle}
                 </motion.p>
 
                 {/* Animated Get in touch button */}
@@ -115,7 +118,7 @@ export default function Footer() {
                             }}
                         />
 
-                        <span className="relative z-10 drop-shadow-lg">Get in touch</span>
+                        <span className="relative z-10 drop-shadow-lg">{t.footer.cta}</span>
 
                         {/* Arrow icon with animation */}
                         <motion.svg
@@ -160,8 +163,7 @@ export default function Footer() {
                 transition={{ duration: 0.8, delay: 0.5 }}
                 className="absolute bottom-16 text-white/30 text-xs max-w-md text-center px-6 font-light"
             >
-                Please note that these deployed projects are initial versions. <br className="hidden sm:block" />
-                If you encounter any issues, I would appreciate your feedback to help refine them.
+                {t.footer.disclaimer}
             </motion.p>
 
             {/* Bottom copyright */}
@@ -172,7 +174,7 @@ export default function Footer() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="absolute bottom-6 text-white/20 text-xs"
             >
-                © 2026 Mathis Portfolio. All rights reserved.
+                {t.footer.copyright}
             </motion.div>
         </footer>
     );

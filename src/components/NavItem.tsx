@@ -9,16 +9,18 @@ export default function NavItem({ label, index }: NavItemProps) {
     // Generate proper href for each nav item
     const getHref = () => {
         const lowerLabel = label.toLowerCase();
-        switch (lowerLabel) {
-            case "about":
-                return "/about";
-            case "work":
-                return "/#work";
-            case "contact":
-                return "/contact";
-            default:
-                return `/#${lowerLabel}`;
-        }
+
+        // Map both English and French labels to their routes
+        const routeMap: Record<string, string> = {
+            "work": "/#work",
+            "projets": "/#work",
+            "travaux": "/#work",
+            "about": "/about",
+            "à propos": "/about",
+            "contact": "/contact",
+        };
+
+        return routeMap[lowerLabel] || `/#${lowerLabel}`;
     };
 
     return (

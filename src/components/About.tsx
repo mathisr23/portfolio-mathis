@@ -2,31 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const aboutItems = [
-    {
-        number: "01",
-        title: "Creatively Curious",
-        description: "Curiosity is my creative engine. I constantly explore new ideas, tools, and visual languages to push my work beyond the expected."
-    },
-    {
-        number: "02",
-        title: "Crafting Digital Experiences",
-        description: "I design and build immersive interfaces where motion, interaction, and usability work together to create memorable experiences."
-    },
-    {
-        number: "03",
-        title: "Detail-Driven Development",
-        description: "From micro-interactions to animation timing, I focus on refining details that elevate the overall quality of a product."
-    },
-    {
-        number: "04",
-        title: "Learning by Building",
-        description: "I learn best by creating, experimenting, and iterating. Turning ideas into tangible projects and real experiences."
-    },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function About() {
+    const { t } = useLanguage();
+    const aboutItems = t.about.items;
     const [activeIndex, setActiveIndex] = useState(0);
 
     return (
@@ -57,12 +37,12 @@ export default function About() {
                         className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start"
                     >
                         <p className="text-white/50 text-sm uppercase tracking-[0.2em] mb-6">
-                            About Me
+                            {t.about.label}
                         </p>
 
                         {/* Intro text */}
                         <p className="text-white/60 text-base leading-relaxed mb-8">
-                            I'm a creative front-end developer driven by curiosity, interaction, and meaningful experiences.
+                            {t.about.intro}
                         </p>
 
                         {/* Dynamic description based on active item */}

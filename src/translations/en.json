@@ -1,0 +1,58 @@
+{
+    "nav": {
+        "work": "Work",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "All Work",
+        "subtitle": "Selected Projects & Experiments",
+        "viewProjects": "View Projects"
+    },
+    "about": {
+        "label": "About Me",
+        "intro": "I'm a creative front-end developer driven by curiosity, interaction, and meaningful experiences.",
+        "items": [
+            {
+                "number": "01",
+                "title": "Creatively Curious",
+                "description": "Curiosity is my creative engine. I constantly explore new ideas, tools, and visual languages to push my work beyond the expected."
+            },
+            {
+                "number": "02",
+                "title": "Crafting Digital Experiences",
+                "description": "I design and build immersive interfaces where motion, interaction, and usability work together to create memorable experiences."
+            },
+            {
+                "number": "03",
+                "title": "Detail-Driven Development",
+                "description": "From micro-interactions to animation timing, I focus on refining details that elevate the overall quality of a product."
+            },
+            {
+                "number": "04",
+                "title": "Learning by Building",
+                "description": "I learn best by creating, experimenting, and iterating. Turning ideas into tangible projects and real experiences."
+            }
+        ]
+    },
+    "contact": {
+        "label": "Get in Touch",
+        "title": "Let's build the future together",
+        "subtitle": "Currently open to full-time front-end opportunities.",
+        "description": "If you're looking for a passionate developer to join your team, let's talk.",
+        "copyEmail": "Copy email",
+        "copied": "Copied!",
+        "openEmail": "Open Email",
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "location": "Based in France (CET) · Available for remote positions"
+    },
+    "footer": {
+        "titlePart1": "Let's build something",
+        "titlePart2": "extraordinary",
+        "subtitle": "Have a project in mind? I'd love to hear about it. Let's create something amazing together.",
+        "cta": "Get in touch",
+        "disclaimer": "Please note that these deployed projects are initial versions. If you encounter any issues, I would appreciate your feedback to help refine them.",
+        "copyright": "© 2026 Mathis Portfolio. All rights reserved."
+    }
+}
