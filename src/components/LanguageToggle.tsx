@@ -20,7 +20,7 @@ export default function LanguageToggle() {
             onClick={toggleLanguage}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="fixed top-8 right-8 z-50 flex items-center gap-2 px-4 py-2 rounded-full hoverable"
+            className="fixed z-50 flex items-center gap-2 px-4 py-2 rounded-full hoverable md:top-8 md:right-8 max-md:bottom-8 max-md:right-4"
             style={{
                 background: "rgba(255, 255, 255, 0.05)",
                 backdropFilter: "blur(20px)",
