@@ -40,6 +40,12 @@ const projects = [
         techStack: ["React", "Vite", "Tailwind CSS"],
         link: "https://poke-gacha-ui.vercel.app/",
     },
+    {
+        title: "UnemployedCountup",
+        image: "/UnemployedCountup.png",
+        techStack: ["HTML (for the pain)", "CSS (for the glow-up illusion)", "JavaScript (to count the seconds of my life wasted)"],
+        link: "https://unemployed-countup.vercel.app/",
+    },
 ];
 
 export default function ProjectsGrid() {
