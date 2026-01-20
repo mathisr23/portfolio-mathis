@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import LanguageToggle from "@/components/LanguageToggle";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
           <LanguageToggle />
           {children}
           <Analytics />
+          <SpeedInsights />
         </LanguageProvider>
       </body>
     </html>
