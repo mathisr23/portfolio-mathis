@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { track } from "@vercel/analytics";
 
 interface ProjectCardProps {
     title: string;
@@ -150,11 +151,19 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
             }}
         >
             {link ? (
-                <a href={link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full h-full"
+                    onClick={() => track('Project Clicked', { title, link })}
+                >
                     {content}
                 </a>
             ) : (
-                content
+                <div onClick={() => track('Project Clicked', { title, link: 'no-link' })}>
+                    {content}
+                </div>
             )}
         </motion.div>
     );

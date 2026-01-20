@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { track } from "@vercel/analytics";
 
 export default function Contact() {
     const { t } = useLanguage();
@@ -13,6 +14,7 @@ export default function Contact() {
     const handleCopy = async () => {
         await navigator.clipboard.writeText(email);
         setCopied(true);
+        track('Email Copied');
         setTimeout(() => setCopied(false), 2000);
     };
 
@@ -145,6 +147,7 @@ export default function Contact() {
                 >
                     <motion.a
                         href={getMailtoLink()}
+                        onClick={() => track('Email Link Opened')}
                         className="group relative inline-flex items-center gap-3 px-10 py-5 text-lg font-medium text-white rounded-2xl overflow-hidden hoverable"
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.98 }}
@@ -199,6 +202,7 @@ export default function Contact() {
                             href="https://www.linkedin.com/in/mathis-rivi%C3%A8re-0a308a1a1/"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => track('Social Clicked', { platform: 'LinkedIn' })}
                             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hoverable"
                             whileHover={{ scale: 1.05, y: -2 }}
                             style={{
@@ -218,6 +222,7 @@ export default function Contact() {
                             href="https://github.com/mathisr23"
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => track('Social Clicked', { platform: 'GitHub' })}
                             className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hoverable"
                             whileHover={{ scale: 1.05, y: -2 }}
                             style={{
