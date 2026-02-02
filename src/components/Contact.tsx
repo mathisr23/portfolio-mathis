@@ -27,7 +27,7 @@ export default function Contact() {
     return (
         <section
             id="contact"
-            className="relative min-h-screen py-20 px-6 flex items-center"
+            className="relative min-h-screen py-20 px-6 flex items-center overflow-hidden"
         >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">

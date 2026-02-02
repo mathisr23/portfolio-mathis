@@ -9,6 +9,18 @@
         "subtitle": "Projets sélectionnés & Expérimentations",
         "viewProjects": "Voir les projets"
     },
+    "projects": {
+        "viewProject": "Voir le projet",
+        "descriptions": {
+            "cosmicData": "Une galaxie interactive où tu peux explorer les étoiles et découvrir des faits insolites.",
+            "coupleCalendar": "Application de calendrier partagé pour couples, pour planifier des événements ensemble.",
+            "flowDesk": "Dashboard de productivité moderne avec gestion de tâches et organisation de workflows.",
+            "flowSync": "Concept de landing page épuré pour une plateforme de collaboration d'équipe.",
+            "moodTime": "Application de suivi d'humeur avec analyses visuelles pour observer les tendances émotionnelles.",
+            "pokeGacha": "Jeu gacha Pokémon fun où vous collectionnez et découvrez des Pokémon aléatoires.",
+            "unemployedCountup": "Timer satirique comptant les secondes de chômage, avec un humour noir assumé."
+        }
+    },
     "about": {
         "label": "À propos de moi",
         "intro": "Je suis un développeur front-end créatif animé par la curiosité, l'interaction et les expériences significatives.",

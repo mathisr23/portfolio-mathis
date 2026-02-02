@@ -37,7 +37,7 @@ export default function Navbar() {
         >
             <div
                 ref={navRef}
-                className="nav-pill relative flex items-center gap-6 px-6 py-3"
+                className="nav-pill relative flex items-center gap-2 sm:gap-6 px-3 sm:px-6 py-2 sm:py-3"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onMouseMove={handleMouseMove}

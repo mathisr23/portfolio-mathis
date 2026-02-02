@@ -7,7 +7,7 @@ export default function Footer() {
     const { t } = useLanguage();
 
     return (
-        <footer className="relative min-h-[100vh] flex flex-col items-center justify-center px-6">
+        <footer className="relative min-h-[70vh] flex flex-col items-center justify-center px-6">
             {/* Gradient background: black to dark purple */}
             <div
                 className="absolute inset-0 z-0"

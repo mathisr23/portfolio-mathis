@@ -26,7 +26,7 @@ export default function NavItem({ label, index }: NavItemProps) {
     return (
         <a
             href={getHref()}
-            className="relative px-8 py-2 rounded-full overflow-hidden group hoverable"
+            className="relative px-3 sm:px-6 py-2 rounded-full overflow-hidden group hoverable"
         >
             {/* Text hover animation container */}
             <span className="text-hover-container block">

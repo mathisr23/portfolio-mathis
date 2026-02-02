@@ -2,6 +2,7 @@
 
 import ProjectCard from "@/components/ProjectCard";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const projects = [
     {
@@ -9,46 +10,55 @@ const projects = [
         image: "/CosmicData.png",
         techStack: ["Next.js", "TypeScript", "Tailwind CSS"],
         link: "https://cosmic-data.vercel.app/",
+        descriptionKey: "cosmicData",
     },
     {
         title: "CoupleCalendar",
         image: "/CoupleCalendar.png",
         techStack: ["React", "TypeScript", "Vite", "Supabase"],
         link: "https://calendar-couple.vercel.app/",
+        descriptionKey: "coupleCalendar",
     },
     {
         title: "FlowDesk",
         image: "/FlowDesk.png",
         techStack: ["Next.js (App Router)", "TypeScript"],
         link: "https://flowdesk-ui.vercel.app/",
+        descriptionKey: "flowDesk",
     },
     {
         title: "FlowSync",
         image: "/FlowSync.png",
         techStack: ["HTML", "CSS", "JavaScript"],
         link: "https://flow-sync-ui.vercel.app/",
+        descriptionKey: "flowSync",
     },
     {
         title: "MoodTime",
         image: "/MoodTime.png",
         techStack: ["React", "TypeScript", "Vite", "Tailwind CSS"],
         link: "https://mood-time-alpha.vercel.app/",
+        descriptionKey: "moodTime",
     },
     {
         title: "PokéGacha",
         image: "/PokéGacha.png",
         techStack: ["React", "Vite", "Tailwind CSS"],
         link: "https://poke-gacha-ui.vercel.app/",
+        descriptionKey: "pokeGacha",
     },
     {
         title: "UnemployedCountup",
         image: "/UnemployedCountup.png",
-        techStack: ["HTML (for the pain)", "CSS (for the glow-up illusion)", "JavaScript (to count the seconds of my life wasted)"],
+        techStack: ["HTML", "CSS", "JavaScript"],
         link: "https://unemployed-countup.vercel.app/",
+        descriptionKey: "unemployedCountup",
     },
 ];
 
 export default function ProjectsGrid() {
+    const { t } = useLanguage();
+
     return (
         <section
             id="work"
@@ -86,6 +96,7 @@ export default function ProjectsGrid() {
                             techStack={project.techStack}
                             index={index}
                             link={project.link}
+                            description={t.projects.descriptions[project.descriptionKey as keyof typeof t.projects.descriptions]}
                         />
                     ))}
                 </div>

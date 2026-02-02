@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-[#0a0a0b] text-white`}
+        className={`${inter.variable} ${playfair.variable} antialiased bg-[#0a0a0b] text-white overflow-x-hidden`}
       >
         <LanguageProvider>
           <CustomCursor />

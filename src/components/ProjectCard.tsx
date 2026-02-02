@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProjectCardProps {
     title: string;
@@ -11,12 +12,22 @@ interface ProjectCardProps {
     techStack: string[];
     index: number;
     link?: string;
+    description?: string;
 }
 
-export default function ProjectCard({ title, image, techStack, index, link }: ProjectCardProps) {
+export default function ProjectCard({ title, image, techStack, index, link, description }: ProjectCardProps) {
+    const { t } = useLanguage();
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const cardRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     const handleMouseMove = (e: React.MouseEvent) => {
         if (!cardRef.current) return;
@@ -45,11 +56,11 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
             {/* Dark Gradient Overlay - Always visible at bottom for text readability, intensifies on hover */}
             <motion.div
                 className="absolute inset-0 rounded-xl pointer-events-none"
-                initial={{ opacity: 0.3 }}
-                animate={{ opacity: isHovered ? 0.6 : 0.3 }}
+                initial={{ opacity: 0.7 }}
+                animate={{ opacity: isHovered ? 0.85 : 0.7 }}
                 transition={{ duration: 0.4 }}
                 style={{
-                    background: "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%)",
+                    background: "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.95) 100%)",
                 }}
             />
 
@@ -71,7 +82,7 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
                     }}
                 >
                     <span className="text-white font-medium text-sm tracking-wide">
-                        View Project
+                        {t.projects.viewProject}
                     </span>
                     <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
                         <svg
@@ -91,27 +102,19 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
             </div>
 
             {/* Content - Bottom Left */}
-            <div className="absolute bottom-0 left-0 w-full p-8 z-20 flex flex-col justify-end">
+            <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 z-20 flex flex-col justify-end">
                 {/* Project Title */}
                 <motion.h3
                     initial={{ y: 0 }}
                     animate={{ y: isHovered ? -5 : 0 }}
                     transition={{ duration: 0.4 }}
-                    className="text-3xl font-medium text-white mb-3"
+                    className="text-2xl sm:text-3xl font-medium text-white mb-3"
                 >
                     {title}
                 </motion.h3>
 
-                {/* Tech Stack - Slides up and fades in */}
-                <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{
-                        opacity: isHovered ? 1 : 0.7,
-                        height: "auto",
-                    }}
-                    transition={{ duration: 0.4 }}
-                    className="flex flex-wrap gap-2 overflow-hidden"
-                >
+                {/* Tech Stack - Always visible */}
+                <div className="flex flex-wrap gap-2">
                     {techStack.map((tech) => (
                         <span
                             key={tech}
@@ -125,7 +128,22 @@ export default function ProjectCard({ title, image, techStack, index, link }: Pr
                             {tech}
                         </span>
                     ))}
-                </motion.div>
+                </div>
+
+                {/* Description - Always visible on mobile, fades in on hover for desktop */}
+                {description && (
+                    <motion.p
+                        initial={{ opacity: isMobile ? 1 : 0, y: isMobile ? 0 : 10 }}
+                        animate={{
+                            opacity: isMobile || isHovered ? 1 : 0,
+                            y: isMobile || isHovered ? 0 : 10,
+                        }}
+                        transition={{ duration: 0.4, delay: 0.1 }}
+                        className="mt-3 text-sm text-white/80 leading-relaxed"
+                    >
+                        {description}
+                    </motion.p>
+                )}
             </div>
         </div>
     );

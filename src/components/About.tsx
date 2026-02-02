@@ -12,7 +12,7 @@ export default function About() {
     return (
         <section
             id="about"
-            className="relative min-h-screen py-32 px-6"
+            className="relative min-h-screen py-32 px-6 overflow-hidden"
             style={{
                 background: "linear-gradient(180deg, #0a0a0b 0%, #0f0a15 50%, #1a0a2e 100%)",
             }}

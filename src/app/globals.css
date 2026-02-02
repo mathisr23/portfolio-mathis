@@ -73,6 +73,7 @@ body {
   position: relative;
   overflow: hidden;
   height: 1.25em;
+  white-space: nowrap;
 }
 
 .text-hover-item {
