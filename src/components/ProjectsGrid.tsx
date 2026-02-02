@@ -57,11 +57,11 @@ export default function ProjectsGrid() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/purple-background-project.jpg"
+                    src="/purple-projects.jpg"
                     alt="Projects Background"
                     fill
                     quality={90}
-                    className="object-cover object-top"
+                    className="object-fill object-top"
                 />
             </div>
 
