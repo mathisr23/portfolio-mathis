@@ -1,180 +1,179 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
     const { t } = useLanguage();
+    const shouldReduceMotion = useReducedMotion();
+    const ease = [0.22, 1, 0.36, 1] as const;
 
     return (
-        <footer className="relative min-h-[70vh] flex flex-col items-center justify-center px-6">
-            {/* Gradient background: black to dark purple */}
+        <footer
+            className="relative flex flex-col px-8 md:px-14 pt-20 pb-10 overflow-hidden"
+            style={{ minHeight: "55vh" }}
+            role="contentinfo"
+        >
+            {/* Background gradient */}
             <div
                 className="absolute inset-0 z-0"
+                aria-hidden="true"
                 style={{
-                    background: "linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 60%, #1a0a2e 85%, #2d1b4e 100%)",
+                    background:
+                        "linear-gradient(180deg, #0a0a0b 0%, #0a0a0b 40%, #0f0b18 72%, #1a0d2e 100%)",
                 }}
             />
 
-            {/* Purple glow accent */}
+            {/* Purple bloom at bottom */}
             <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] z-[1] pointer-events-none"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[280px] z-[1] pointer-events-none"
+                aria-hidden="true"
                 style={{
-                    background: "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(139, 92, 246, 0.2) 0%, transparent 70%)",
+                    background:
+                        "radial-gradient(ellipse 70% 60% at 50% 100%, rgba(139, 92, 246, 0.18) 0%, transparent 70%)",
                 }}
             />
 
-            {/* Content */}
-            <div className="relative z-10 text-center max-w-4xl mx-auto">
-                {/* Catchy headline */}
+            {/* Main content */}
+            <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center max-w-4xl mx-auto w-full py-8">
+                {/* Decorative rule */}
+                <motion.div
+                    initial={shouldReduceMotion ? false : { scaleX: 0, originX: "50%" }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease }}
+                    className="h-px mx-auto mb-14"
+                    aria-hidden="true"
+                    style={{
+                        width: "40%",
+                        background:
+                            "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)",
+                    }}
+                />
+
+                {/* Headline */}
                 <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                    className="text-[clamp(2.5rem,8vw,5rem)] font-serif leading-[1.1] tracking-[-0.02em] text-white"
-                    style={{ fontFamily: "var(--font-serif)" }}
+                    transition={{ duration: 0.8, ease }}
+                    className="text-white leading-[1.08] tracking-[-0.025em]"
+                    style={{
+                        fontFamily: "var(--font-serif)",
+                        fontStyle: "italic",
+                        fontWeight: 300,
+                        fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+                    }}
                 >
-                    {t.footer.titlePart1}
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-500">
+                    {t.footer.titlePart1}{" "}
+                    <span
+                        className="text-transparent bg-clip-text"
+                        style={{
+                            backgroundImage:
+                                "linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%)",
+                        }}
+                    >
                         {t.footer.titlePart2}
                     </span>
                 </motion.h2>
 
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                    className="mt-6 text-white/60 text-lg max-w-2xl mx-auto"
+                    transition={{ duration: 0.7, delay: 0.15, ease }}
+                    className="mt-5 text-white/40 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+                    style={{ fontFamily: "var(--font-sans)" }}
                 >
                     {t.footer.subtitle}
                 </motion.p>
 
-                {/* Animated Get in touch button */}
+                {/* CTA */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-                    className="mt-12"
+                    transition={{ duration: 0.7, delay: 0.3, ease }}
+                    className="mt-10"
                 >
                     <motion.a
                         href="/contact"
-                        className="group relative inline-flex items-center gap-3 px-12 py-6 text-lg font-medium text-white rounded-2xl overflow-hidden hoverable"
-                        whileHover={{
-                            scale: 1.05,
-                            rotateX: -5,
-                            rotateY: 5,
-                            z: 50,
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                        className="group inline-flex items-center gap-3 hoverable"
+                        whileHover={shouldReduceMotion ? {} : { y: -2 }}
+                        whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 28 }}
                         style={{
-                            background: "rgba(139, 92, 246, 0.15)",
-                            backdropFilter: "blur(20px)",
-                            WebkitBackdropFilter: "blur(20px)",
-                            border: "1px solid rgba(139, 92, 246, 0.3)",
-                            boxShadow: "0 8px 32px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                            transformStyle: "preserve-3d",
-                            perspective: "1000px",
+                            fontFamily: "var(--font-sans)",
+                            fontSize: "0.78rem",
+                            fontWeight: 600,
+                            letterSpacing: "0.12em",
+                            textTransform: "uppercase" as const,
+                            color: "rgba(255,255,255,0.75)",
+                            padding: "0.875rem 2.25rem",
+                            border: "1px solid rgba(139, 92, 246, 0.28)",
+                            borderRadius: "3px",
+                            background: "rgba(139, 92, 246, 0.07)",
+                            backdropFilter: "blur(16px)",
+                            WebkitBackdropFilter: "blur(16px)",
+                            boxShadow:
+                                "0 4px 24px rgba(139, 92, 246, 0.12), inset 0 1px 0 rgba(255,255,255,0.05)",
+                            transition: "all 0.35s ease",
+                            textDecoration: "none",
+                        }}
+                        onMouseEnter={(e) => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.borderColor = "rgba(139, 92, 246, 0.55)";
+                            el.style.background = "rgba(139, 92, 246, 0.14)";
+                            el.style.color = "rgba(255,255,255,1)";
+                        }}
+                        onMouseLeave={(e) => {
+                            const el = e.currentTarget as HTMLElement;
+                            el.style.borderColor = "rgba(139, 92, 246, 0.28)";
+                            el.style.background = "rgba(139, 92, 246, 0.07)";
+                            el.style.color = "rgba(255,255,255,0.75)";
                         }}
                     >
-                        {/* Animated glow border */}
-                        <motion.div
-                            className="absolute inset-0 rounded-2xl"
-                            style={{
-                                background: "linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), transparent)",
-                                backgroundSize: "200% 100%",
-                            }}
-                            animate={{
-                                backgroundPosition: ["200% 0%", "-200% 0%"],
-                            }}
-                            transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                        />
-
-                        {/* Inner glass layer */}
-                        <div
-                            className="absolute inset-[1px] rounded-2xl z-[1]"
-                            style={{
-                                background: "linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(30, 20, 50, 0.8) 100%)",
-                            }}
-                        />
-
-                        {/* Shine sweep animation */}
-                        <motion.span
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent z-[2]"
-                            initial={{ x: "-100%" }}
-                            animate={{ x: ["−100%", "200%"] }}
-                            transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                repeatDelay: 3,
-                                ease: "easeInOut",
-                            }}
-                        />
-
-                        <span className="relative z-10 drop-shadow-lg">{t.footer.cta}</span>
-
-                        {/* Arrow icon with animation */}
-                        <motion.svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
+                        <span>{t.footer.cta}</span>
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
                             fill="none"
-                            className="relative z-10"
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{
-                                duration: 1.5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                            aria-hidden="true"
                         >
                             <path
-                                d="M4 10H16M16 10L11 5M16 10L11 15"
+                                d="M2 7H12M12 7L7.5 2.5M12 7L7.5 11.5"
                                 stroke="currentColor"
-                                strokeWidth="2"
+                                strokeWidth="1.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                             />
-                        </motion.svg>
-
-                        {/* Hover glow effect */}
-                        <motion.div
-                            className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
-                            style={{
-                                background: "radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%)",
-                                filter: "blur(20px)",
-                            }}
-                        />
+                        </svg>
                     </motion.a>
                 </motion.div>
             </div>
 
-            {/* Disclaimer */}
-            <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute bottom-16 text-white/30 text-xs max-w-md text-center px-6 font-light"
-            >
-                {t.footer.disclaimer}
-            </motion.p>
-
-            {/* Bottom copyright */}
+            {/* Bottom meta — in normal flow, never overlaps button */}
             <motion.div
-                initial={{ opacity: 0 }}
+                initial={shouldReduceMotion ? false : { opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="absolute bottom-6 text-white/20 text-xs"
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-2 mt-6"
             >
-                {t.footer.copyright}
+                <p
+                    className="text-white/15 text-xs max-w-sm leading-relaxed text-center sm:text-left"
+                    style={{ fontFamily: "var(--font-sans)" }}
+                >
+                    {t.footer.disclaimer}
+                </p>
+                <p
+                    className="text-white/15 text-xs shrink-0"
+                    style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.06em" }}
+                >
+                    {t.footer.copyright}
+                </p>
             </motion.div>
         </footer>
     );
