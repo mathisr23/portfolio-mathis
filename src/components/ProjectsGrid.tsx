@@ -22,11 +22,11 @@ const projects = [
         descriptionKey: "coupleCalendar",
     },
     {
-        title: "FlowDesk",
-        image: "/FlowDesk.png",
-        techStack: ["Next.js", "TypeScript"],
-        link: "https://flowdesk-ui.vercel.app/",
-        descriptionKey: "flowDesk",
+        title: "AtelierLvy",
+        image: "/atelierlvy.png",
+        techStack: ["Next.js", "TypeScript", "Tailwind"],
+        link: "https://www.atelierlvy.com/",
+        descriptionKey: "atelierLvy",
     },
     {
         title: "FlowSync",
