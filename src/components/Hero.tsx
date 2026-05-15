@@ -26,7 +26,7 @@ export default function Hero() {
             {/* Background — treated as texture, not hero */}
             <div className="absolute inset-0 z-0" aria-hidden="true">
                 <Image
-                    src="/purple-background-hero.jpg"
+                    src="/purple-background-hero.webp"
                     alt=""
                     fill
                     priority

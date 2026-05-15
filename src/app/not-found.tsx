@@ -10,10 +10,7 @@ export default function NotFound() {
             <div className="absolute inset-0 pointer-events-none opacity-20">
                 <div
                     className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                        backgroundImage: "url('/noise.png')", // fallback or generated noise
-                        opacity: 0.1,
-                    }}
+                    style={{ opacity: 0.1 }}
                 />
             </div>
 
