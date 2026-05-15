@@ -12,10 +12,10 @@
     "projects": {
         "viewProject": "View Project",
         "descriptions": {
-            "cosmicData": "An interactive galaxy where you can explore stars and discover fascinating, unusual facts.",
+            "museum500": "An interactive museum chronicling five infamous software failures that shaped the industry — from Therac-25 to CrowdStrike.",
             "coupleCalendar": "Shared calendar app for couples to plan events and sync schedules together.",
             "atelierLvy": "Branding & creative studio website built for Atelier Lvy.",
-            "flowSync": "Clean landing page concept for a team collaboration platform.",
+            "stillLooking": "My personal chronicle of the first-job search, an honest look at what junior developers go through today.",
             "moodTime": "Mood tracking app with visual analytics to monitor emotional patterns over time.",
             "pokeGacha": "Fun Pokémon gacha game where you collect and discover random Pokémon.",
             "unemployedCountup": "Satirical timer counting the seconds since unemployment, made with dark humor."

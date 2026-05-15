@@ -8,11 +8,11 @@ import { track } from "@vercel/analytics";
 
 const projects = [
     {
-        title: "CosmicData",
-        image: "/CosmicData.webp",
-        techStack: ["Next.js", "TypeScript", "Tailwind"],
-        link: "https://cosmic-data.vercel.app/",
-        descriptionKey: "cosmicData",
+        title: "Museum of 500",
+        image: "/museum500.webp",
+        techStack: ["Angular", "Three.js", "GSAP"],
+        link: "https://museum500.vercel.app/",
+        descriptionKey: "museum500",
     },
     {
         title: "CoupleCalendar",
@@ -29,11 +29,11 @@ const projects = [
         descriptionKey: "atelierLvy",
     },
     {
-        title: "FlowSync",
-        image: "/FlowSync.webp",
-        techStack: ["HTML", "CSS", "JavaScript"],
-        link: "https://flow-sync-ui.vercel.app/",
-        descriptionKey: "flowSync",
+        title: "Still Looking",
+        image: "/still-looking.webp",
+        techStack: ["Next.js", "TypeScript", "GSAP"],
+        link: "https://still-looking.vercel.app/",
+        descriptionKey: "stillLooking",
     },
     {
         title: "MoodTime",

@@ -6,14 +6,8 @@ const PUBLIC = new URL("../public/", import.meta.url).pathname.replace(/^\/([A-Z
 
 // [source, output, maxWidth, quality]
 const jobs = [
-  ["purple-background-hero.jpg", "purple-background-hero.webp", 1920, 70],
-  ["CosmicData.png", "CosmicData.webp", 800, 80],
-  ["CoupleCalendar.png", "CoupleCalendar.webp", 800, 80],
-  ["FlowSync.png", "FlowSync.webp", 800, 80],
-  ["MoodTime.png", "MoodTime.webp", 800, 80],
-  ["PokéGacha.png", "PokeGacha.webp", 800, 80],
-  ["UnemployedCountup.png", "UnemployedCountup.webp", 800, 80],
-  ["atelierlvy.png", "atelierlvy.webp", 800, 80],
+  ["museum500.png", "museum500.webp", 800, 80],
+  ["still-looking.png", "still-looking.webp", 800, 80],
 ];
 
 const kb = (n) => (n / 1024).toFixed(0) + " KB";
