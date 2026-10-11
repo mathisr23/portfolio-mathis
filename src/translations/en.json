@@ -36,49 +36,49 @@
         "next": "Next project"
     },
     "about": {
-        "label": "About Me",
-        "intro": "I'm a creative front-end developer driven by curiosity, interaction, and meaningful experiences.",
+        "label": "About",
+        "intro": "I'm Mathis, a front-end developer based in France. I build websites that behave more like films than documents: scroll-driven 3D, motion, and type that reacts to you.",
         "items": [
             {
                 "number": "01",
-                "title": "Creatively Curious",
-                "description": "Curiosity is my creative engine. I constantly explore new ideas, tools, and visual languages to push my work beyond the expected."
+                "title": "Scroll as a camera",
+                "description": "In Aetherius the whole site is one camera move through fog. In Nocturne a chrome form follows you from section to section. I like turning scrolling into direction, not just navigation."
             },
             {
                 "number": "02",
-                "title": "Crafting Digital Experiences",
-                "description": "I design and build immersive interfaces where motion, interaction, and usability work together to create memorable experiences."
+                "title": "Built, not imported",
+                "description": "I'd rather make it than download it. The figures in Aetherius are generated in code, ring by ring, and the name at the top of this site is thousands of particles sampled from the heading itself."
             },
             {
                 "number": "03",
-                "title": "Detail-Driven Development",
-                "description": "From micro-interactions to animation timing, I focus on refining details that elevate the overall quality of a product."
+                "title": "Real clients, real constraints",
+                "description": "Atelier Lvy is a ceramic artist's business, not a concept. Shipping it taught me that bookings and readability come before effects."
             },
             {
                 "number": "04",
-                "title": "Learning by Building",
-                "description": "I learn best by creating, experimenting, and iterating. Turning ideas into tangible projects and real experiences."
+                "title": "Small things, finished",
+                "description": "Some projects are just for fun: a dice game I sent to friends, a Pokémon gacha, a counter for my own job search. Finishing small things is how I learn the most."
             }
         ]
     },
     "contact": {
-        "label": "Get in Touch",
-        "title": "Let's build the future together",
-        "subtitle": "Currently open to full-time front-end opportunities.",
-        "description": "If you're looking for a passionate developer to join your team, let's talk.",
+        "label": "Contact",
+        "title": "Let's work together",
+        "subtitle": "I'm looking for a full-time front-end role, in France or remote.",
+        "description": "If your team builds interfaces where motion and detail matter, I'd love to hear from you.",
         "copyEmail": "Copy email",
         "copied": "Copied!",
         "openEmail": "Open Email",
         "linkedin": "LinkedIn",
         "github": "GitHub",
-        "location": "Based in France (CET) · Available for remote positions"
+        "location": "Based in France (CET) · Open to remote"
     },
     "footer": {
         "titlePart1": "Let's build something",
-        "titlePart2": "extraordinary",
-        "subtitle": "Have a project in mind? I'd love to hear about it. Let's create something amazing together.",
+        "titlePart2": "people remember",
+        "subtitle": "Hiring a front-end developer, or have a project in mind? My inbox is open.",
         "cta": "Get in touch",
-        "disclaimer": "Please note that these deployed projects are initial versions. If you encounter any issues, I would appreciate your feedback to help refine them.",
-        "copyright": "© 2026 Mathis Portfolio. All rights reserved."
+        "colophon": "Designed and built by Mathis Rivière with Next.js, Three.js and Framer Motion.",
+        "copyright": "© 2026 Mathis Rivière"
     }
 }

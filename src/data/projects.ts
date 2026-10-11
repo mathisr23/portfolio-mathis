@@ -79,7 +79,7 @@ export const featuredProjects: FeaturedProject[] = [
         year: "2026",
         stack: ["Vite", "Three.js", "Lenis"],
         cover: "/work/nocturne-cover.webp",
-        gallery: ["/work/nocturne-2.webp"],
+        gallery: [],
         links: { live: "https://nocturne-landing-teal.vercel.app/" },
         tagline: {
             en: "Landing page concept for a fictional edge-compute platform: liquid infrastructure, taken literally.",
@@ -169,7 +169,7 @@ export const featuredProjects: FeaturedProject[] = [
         year: "2026",
         stack: ["Next.js", "TypeScript", "Tailwind"],
         cover: "/work/atelierlvy-cover.webp",
-        gallery: ["/work/atelierlvy-2.webp"],
+        gallery: [],
         links: { live: "https://www.atelierlvy.com/" },
         tagline: {
             en: "Website for Léa, a ceramic artist: her work, her shop, and her pottery classes.",
@@ -223,7 +223,7 @@ export const labProjects: LabProject[] = [
     {
         title: "Still Looking",
         stack: ["Next.js", "GSAP"],
-        image: "/still-looking.webp",
+        image: "/work/still-looking-cover.webp",
         link: "https://still-looking.vercel.app/",
         description: {
             en: "My chronicle of the first-job search, a personal look at what junior developers go through today.",
@@ -233,7 +233,7 @@ export const labProjects: LabProject[] = [
     {
         title: "PokéGacha",
         stack: ["React", "Vite"],
-        image: "/PokeGacha.webp",
+        image: "/work/pokegacha-cover.webp",
         link: "https://poke-gacha-ui.vercel.app/",
         description: {
             en: "A Pokémon gacha game where you collect and discover random Pokémon.",
@@ -243,7 +243,7 @@ export const labProjects: LabProject[] = [
     {
         title: "UnemployedCountup",
         stack: ["HTML", "CSS", "JavaScript"],
-        image: "/UnemployedCountup.webp",
+        image: "/work/unemployed-countup-cover.webp",
         link: "https://unemployed-countup.vercel.app/",
         description: {
             en: "A satirical timer counting the seconds since unemployment, made with dark humour.",

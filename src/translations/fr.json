@@ -36,49 +36,49 @@
         "next": "Projet suivant"
     },
     "about": {
-        "label": "À propos de moi",
-        "intro": "Je suis un développeur front-end créatif animé par la curiosité, l'interaction et les expériences significatives.",
+        "label": "À propos",
+        "intro": "Je suis Mathis, développeur front-end basé en France. Je crée des sites qui se comportent plus comme des films que comme des documents : 3D pilotée au scroll, motion, et typographie qui réagit.",
         "items": [
             {
                 "number": "01",
-                "title": "Créativement curieux",
-                "description": "La curiosité est mon moteur créatif. J'explore constamment de nouvelles idées, outils et langages visuels pour repousser les limites de mon travail."
+                "title": "Le scroll comme caméra",
+                "description": "Dans Aetherius, tout le site est un seul mouvement de caméra dans la brume. Dans Nocturne, une forme chromée vous suit d'une section à l'autre. J'aime faire du scroll une mise en scène, pas seulement une navigation."
             },
             {
                 "number": "02",
-                "title": "Création d'expériences numériques",
-                "description": "Je conçois et construis des interfaces immersives où le mouvement, l'interaction et l'utilisabilité travaillent ensemble pour créer des expériences mémorables."
+                "title": "Construit, pas importé",
+                "description": "Je préfère fabriquer plutôt que télécharger. Les silhouettes d'Aetherius sont générées en code, anneau par anneau, et le nom en haut de ce site est fait de milliers de particules échantillonnées depuis le titre lui-même."
             },
             {
                 "number": "03",
-                "title": "Développement axé sur les détails",
-                "description": "Des micro-interactions au timing des animations, je me concentre sur le raffinement des détails qui élèvent la qualité globale d'un produit."
+                "title": "De vrais clients, de vraies contraintes",
+                "description": "Atelier Lvy est l'activité d'une artiste céramiste, pas un concept. Le livrer m'a appris que la réservation et la lisibilité passent avant les effets."
             },
             {
                 "number": "04",
-                "title": "Apprendre en créant",
-                "description": "J'apprends mieux en créant, en expérimentant et en itérant. Transformer des idées en projets tangibles et en expériences réelles."
+                "title": "De petits projets, terminés",
+                "description": "Certains projets sont juste pour le plaisir : un jeu de dés envoyé à des amis, un gacha Pokémon, un compteur pour ma propre recherche d'emploi. C'est en terminant de petites choses que j'apprends le plus."
             }
         ]
     },
     "contact": {
-        "label": "Me contacter",
-        "title": "Construisons l'avenir ensemble",
-        "subtitle": "Actuellement ouvert aux opportunités front-end à temps plein.",
-        "description": "Si vous recherchez un développeur passionné pour rejoindre votre équipe, discutons-en.",
+        "label": "Contact",
+        "title": "Travaillons ensemble",
+        "subtitle": "Je recherche un poste de développeur front-end en CDI, en France ou en remote.",
+        "description": "Si votre équipe crée des interfaces où le motion et le détail comptent, j'aimerais beaucoup échanger avec vous.",
         "copyEmail": "Copier l'e-mail",
         "copied": "Copié !",
         "openEmail": "Ouvrir l'e-mail",
         "linkedin": "LinkedIn",
         "github": "GitHub",
-        "location": "Basé en France (CET) · Disponible pour des postes à distance"
+        "location": "Basé en France (CET) · Ouvert au remote"
     },
     "footer": {
-        "titlePart1": "Construisons quelque chose",
-        "titlePart2": "d'extraordinaire",
-        "subtitle": "Vous avez un projet en tête ? J'aimerais en savoir plus. Créons ensemble quelque chose d'incroyable.",
+        "titlePart1": "Créons quelque chose",
+        "titlePart2": "de mémorable",
+        "subtitle": "Vous recrutez un développeur front-end, ou vous avez un projet en tête ? Ma boîte mail est ouverte.",
         "cta": "Me contacter",
-        "disclaimer": "Veuillez noter que ces projets déployés sont des versions initiales. Si vous rencontrez des problèmes, j'apprécierai vos retours pour les améliorer.",
-        "copyright": "© 2026 Mathis Portfolio. Tous droits réservés."
+        "colophon": "Conçu et développé par Mathis Rivière avec Next.js, Three.js et Framer Motion.",
+        "copyright": "© 2026 Mathis Rivière"
     }
 }

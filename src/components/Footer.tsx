@@ -166,7 +166,7 @@ export default function Footer() {
                     className="text-white/15 text-xs max-w-sm leading-relaxed text-center sm:text-left"
                     style={{ fontFamily: "var(--font-sans)" }}
                 >
-                    {t.footer.disclaimer}
+                    {t.footer.colophon}
                 </p>
                 <p
                     className="text-white/15 text-xs shrink-0"
