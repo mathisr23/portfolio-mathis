@@ -35,8 +35,9 @@ export const metadata: Metadata = {
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : "http://localhost:3000"
   ),
-  title: "Mathis Rivière - Portfolio",
-  description: "Mathis Rivière - Portfolio",
+  title: "Mathis Rivière — Creative Front-end Developer",
+  description:
+    "Mathis Rivière is a creative front-end developer building cinematic, scroll-driven web experiences with 3D, motion and interaction.",
 };
 
 export default function RootLayout({

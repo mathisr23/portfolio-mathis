@@ -5,9 +5,10 @@
         "contact": "Contact"
     },
     "hero": {
-        "title": "All Work",
-        "subtitle": "Selected Projects & Experiments",
-        "viewProjects": "View Projects"
+        "label": "Creative front-end developer",
+        "statement": "I build cinematic, scroll-driven web experiences: 3D, motion and interfaces that feel alive.",
+        "availability": "Open to full-time roles · France / Remote",
+        "viewProjects": "Selected work"
     },
     "work": {
         "featuredLabel": "Selected Work",

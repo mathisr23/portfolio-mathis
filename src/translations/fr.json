@@ -5,9 +5,10 @@
         "contact": "Contact"
     },
     "hero": {
-        "title": "Tous les projets",
-        "subtitle": "Projets sélectionnés & Expérimentations",
-        "viewProjects": "Voir les projets"
+        "label": "Développeur front-end créatif",
+        "statement": "Je crée des expériences web cinématiques pilotées au scroll : 3D, motion et interfaces vivantes.",
+        "availability": "Ouvert aux postes en CDI · France / Remote",
+        "viewProjects": "Projets sélectionnés"
     },
     "work": {
         "featuredLabel": "Projets sélectionnés",
