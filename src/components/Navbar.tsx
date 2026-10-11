@@ -6,8 +6,12 @@ import NavItem from "@/components/NavItem";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
-    const { t } = useLanguage();
-    const navItems = [t.nav.work, t.nav.about, t.nav.contact];
+    const { t, href } = useLanguage();
+    const navItems = [
+        { label: t.nav.work, href: href("/#work") },
+        { label: t.nav.about, href: href("/about") },
+        { label: t.nav.contact, href: href("/contact") },
+    ];
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -36,7 +40,7 @@ export default function Navbar() {
             >
                 {/* Brand mark */}
                 <a
-                    href="/"
+                    href={href("/")}
                     className="nav-brand hoverable"
                     aria-label="Mathis Rivière — Home"
                 >
@@ -47,8 +51,8 @@ export default function Navbar() {
                 <nav aria-label="Main navigation">
                     <ul className="flex items-center gap-0" role="list">
                         {navItems.map((item, index) => (
-                            <li key={item}>
-                                <NavItem label={item} index={index} />
+                            <li key={item.href}>
+                                <NavItem label={item.label} href={item.href} index={index} />
                             </li>
                         ))}
                     </ul>

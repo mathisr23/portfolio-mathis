@@ -19,10 +19,8 @@ export default function Contact() {
     };
 
     const getMailtoLink = () => {
-        const subject = encodeURIComponent("Hello from your portfolio");
-        const body = encodeURIComponent(
-            "Hi Mathis,\n\nI came across your portfolio and wanted to reach out.\n\n\n\nBest,"
-        );
+        const subject = encodeURIComponent(t.contactMail.subject);
+        const body = encodeURIComponent(t.contactMail.body);
         return `mailto:${email}?subject=${subject}&body=${body}`;
     };
 

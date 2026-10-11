@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
-    const { t } = useLanguage();
+    const { t, href } = useLanguage();
     const shouldReduceMotion = useReducedMotion();
     const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -97,7 +97,7 @@ export default function Footer() {
                     className="mt-10"
                 >
                     <motion.a
-                        href="/contact"
+                        href={href("/contact")}
                         className="group inline-flex items-center gap-3 hoverable"
                         whileHover={shouldReduceMotion ? {} : { y: -2 }}
                         whileTap={shouldReduceMotion ? {} : { scale: 0.97 }}

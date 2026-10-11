@@ -1,4 +1,6 @@
-export type Language = "en" | "fr";
+import type { Language } from "@/lib/i18n";
+
+export type { Language };
 export type Localized = Record<Language, string>;
 
 export type ProjectKind = "concept" | "client" | "experiment";

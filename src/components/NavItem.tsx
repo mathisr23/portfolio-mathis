@@ -4,27 +4,14 @@ import { usePathname } from "next/navigation";
 
 interface NavItemProps {
     label: string;
+    href: string;
     index: number;
 }
 
-export default function NavItem({ label, index }: NavItemProps) {
+export default function NavItem({ label, href, index }: NavItemProps) {
     const pathname = usePathname();
-
-    const getHref = () => {
-        const lowerLabel = label.toLowerCase();
-        const routeMap: Record<string, string> = {
-            "work": "/#work",
-            "projets": "/#work",
-            "travaux": "/#work",
-            "about": "/about",
-            "à propos": "/about",
-            "contact": "/contact",
-        };
-        return routeMap[lowerLabel] || `/#${lowerLabel}`;
-    };
-
-    const href = getHref();
-    const isActive = (href === "/about" || href === "/contact") && pathname === href;
+    // Section anchors (e.g. /en#work) are never the "current page"
+    const isActive = !href.includes("#") && pathname === href;
 
     return (
         <a

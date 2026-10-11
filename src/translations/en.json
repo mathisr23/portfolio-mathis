@@ -80,5 +80,21 @@
         "cta": "Get in touch",
         "colophon": "Designed and built by Mathis Rivière with Next.js, Three.js and Framer Motion.",
         "copyright": "© 2026 Mathis Rivière"
+    },
+    "meta": {
+        "title": "Mathis Rivière — Creative Front-end Developer",
+        "description": "Mathis Rivière is a creative front-end developer building cinematic, scroll-driven web experiences with 3D, motion and interaction.",
+        "about": "About",
+        "contact": "Contact",
+        "skip": "Skip to main content"
+    },
+    "contactMail": {
+        "subject": "Hello from your portfolio",
+        "body": "Hi Mathis,\n\nI came across your portfolio and wanted to reach out.\n\n\n\nBest,"
+    },
+    "notFound": {
+        "label": "Reality_Not_Found",
+        "text": "The page you are looking for has been lost in the digital void.",
+        "back": "Return to Base"
     }
 }

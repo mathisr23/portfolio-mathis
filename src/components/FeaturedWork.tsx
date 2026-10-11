@@ -9,7 +9,7 @@ import { featuredProjects } from "@/data/projects";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function FeaturedWork() {
-    const { t, language } = useLanguage();
+    const { t, language, href } = useLanguage();
     const shouldReduceMotion = useReducedMotion();
 
     return (
@@ -64,7 +64,7 @@ export default function FeaturedWork() {
                     return (
                         <li key={project.slug} className="list-none">
                             <Link
-                                href={`/work/${project.slug}`}
+                                href={href(`/work/${project.slug}`)}
                                 className="group grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center hoverable"
                             >
                                 {/* Cover — clip reveal on enter */}

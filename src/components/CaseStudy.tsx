@@ -40,7 +40,7 @@ function ArrowUpRight({ className = "" }: { className?: string }) {
 }
 
 export default function CaseStudy({ project }: { project: FeaturedProject }) {
-    const { t, language } = useLanguage();
+    const { t, language, href } = useLanguage();
     const shouldReduceMotion = useReducedMotion();
 
     const index = featuredProjects.findIndex((p) => p.slug === project.slug);
@@ -73,7 +73,7 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
                     style={{ fontFamily: "var(--font-mono)" }}
                 >
                     <Link
-                        href="/#work"
+                        href={href("/#work")}
                         className="group inline-flex items-center gap-3 text-white/40 hover:text-white transition-colors duration-300 text-[0.68rem] uppercase tracking-[0.22em] hoverable"
                     >
                         <ArrowRight className="rotate-180 transition-transform duration-300 group-hover:-translate-x-1" />
@@ -306,7 +306,7 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
             {/* ── Next project ───────────────────────── */}
             <nav aria-label={t.caseStudy.next} className="px-8 md:px-14">
                 <Link
-                    href={`/work/${next.slug}`}
+                    href={href(`/work/${next.slug}`)}
                     className="group relative block border-t border-white/[0.08] py-14 md:py-20 hoverable"
                 >
                     <span className={monoLabel} style={{ fontFamily: "var(--font-mono)" }}>

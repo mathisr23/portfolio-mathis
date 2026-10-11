@@ -1,60 +1,51 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import en from "@/translations/en.json";
 import fr from "@/translations/fr.json";
-
-type Language = "en" | "fr";
+import { LOCALE_COOKIE, localePath, type Language } from "@/lib/i18n";
 
 type Translations = typeof en;
 
 interface LanguageContextType {
     language: Language;
     setLanguage: (lang: Language) => void;
+    /** Locale-prefixed internal href */
+    href: (path: string) => string;
     t: Translations;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const translations = {
-    en,
-    fr,
-};
+const translations: Record<Language, Translations> = { en, fr };
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguageState] = useState<Language>("en");
-    const [mounted, setMounted] = useState(false);
+export function LanguageProvider({ language, children }: { language: Language; children: ReactNode }) {
+    const router = useRouter();
+    const pathname = usePathname();
 
-    // Load language preference from localStorage on mount
-    useEffect(() => {
-        const savedLanguage = localStorage.getItem("language") as Language | null;
-        if (savedLanguage && (savedLanguage === "en" || savedLanguage === "fr")) {
-            setLanguageState(savedLanguage);
-        }
-        setMounted(true);
-    }, []);
-
-    const setLanguage = (lang: Language) => {
-        setLanguageState(lang);
-        localStorage.setItem("language", lang);
-    };
-
-    // Prevent hydration mismatch by rendering children only after mount
-    if (!mounted) {
-        return null;
-    }
-
-    return (
-        <LanguageContext.Provider
-            value={{
-                language,
-                setLanguage,
-                t: translations[language],
-            }}
-        >
-            {children}
-        </LanguageContext.Provider>
+    const setLanguage = useCallback(
+        (lang: Language) => {
+            if (lang === language) return;
+            // Remember the choice for unprefixed URLs (handled in proxy.ts)
+            document.cookie = `${LOCALE_COOKIE}=${lang}; path=/; max-age=31536000; samesite=lax`;
+            const rest = pathname.replace(/^\/(en|fr)(?=\/|$)/, "");
+            router.push(`/${lang}${rest}${window.location.hash}`, { scroll: false });
+        },
+        [language, pathname, router]
     );
+
+    const value = useMemo(
+        () => ({
+            language,
+            setLanguage,
+            href: (path: string) => localePath(path, language),
+            t: translations[language],
+        }),
+        [language, setLanguage]
+    );
+
+    return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

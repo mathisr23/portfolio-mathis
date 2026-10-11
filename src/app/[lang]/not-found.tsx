@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function NotFound() {
+    const { t, href } = useLanguage();
+
     return (
         <div className="relative h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0b] text-white overflow-hidden">
             {/* Glitch Effect Background */}
@@ -31,18 +34,18 @@ export default function NotFound() {
                     transition={{ delay: 0.2, duration: 0.5 }}
                 >
                     <p className="text-xl md:text-2xl text-purple-400 mb-8 font-mono">
-                        Reality_Not_Found
+                        {t.notFound.label}
                     </p>
 
                     <p className="text-white/40 mb-12 max-w-md mx-auto">
-                        The page you are looking for has been lost in the digital void.
+                        {t.notFound.text}
                     </p>
 
                     <Link
-                        href="/"
+                        href={href("/")}
                         className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 group"
                     >
-                        <span className="text-sm font-medium">Return to Base</span>
+                        <span className="text-sm font-medium">{t.notFound.back}</span>
                         <svg
                             width="16"
                             height="16"

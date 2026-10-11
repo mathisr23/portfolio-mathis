@@ -80,5 +80,21 @@
         "cta": "Me contacter",
         "colophon": "Conçu et développé par Mathis Rivière avec Next.js, Three.js et Framer Motion.",
         "copyright": "© 2026 Mathis Rivière"
+    },
+    "meta": {
+        "title": "Mathis Rivière — Développeur Front-end Créatif",
+        "description": "Mathis Rivière est un développeur front-end créatif qui conçoit des expériences web cinématiques pilotées au scroll, avec de la 3D, du motion et de l'interaction.",
+        "about": "À propos",
+        "contact": "Contact",
+        "skip": "Aller au contenu principal"
+    },
+    "contactMail": {
+        "subject": "Bonjour depuis votre portfolio",
+        "body": "Bonjour Mathis,\n\nJ'ai découvert votre portfolio et je souhaitais vous contacter.\n\n\n\nCordialement,"
+    },
+    "notFound": {
+        "label": "Reality_Not_Found",
+        "text": "La page que vous cherchez s'est perdue dans le vide numérique.",
+        "back": "Retour à l'accueil"
     }
 }

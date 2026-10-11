@@ -4,8 +4,9 @@ import Navbar from "@/components/Navbar";
 import CaseStudy from "@/components/CaseStudy";
 import Footer from "@/components/Footer";
 import { featuredProjects, getFeaturedProject } from "@/data/projects";
+import { alternatesFor, isLocale } from "@/lib/i18n";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ lang: string; slug: string }> };
 
 export const dynamicParams = false;
 
@@ -14,16 +15,18 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const project = getFeaturedProject((await params).slug);
-    if (!project) return {};
+    const { lang, slug } = await params;
+    const project = getFeaturedProject(slug);
+    if (!project || !isLocale(lang)) return {};
 
-    const title = `${project.title} — Mathis Rivière`;
+    const description = project.tagline[lang];
     return {
-        title,
-        description: project.tagline.en,
+        title: project.title,
+        description,
+        alternates: alternatesFor(`/work/${project.slug}`, lang),
         openGraph: {
-            title,
-            description: project.tagline.en,
+            title: `${project.title} — Mathis Rivière`,
+            description,
             images: [{ url: project.cover }],
         },
     };
