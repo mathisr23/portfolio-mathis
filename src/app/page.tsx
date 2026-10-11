@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ProjectsGrid from "@/components/ProjectsGrid";
+import FeaturedWork from "@/components/FeaturedWork";
+import LabList from "@/components/LabList";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -10,7 +11,8 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <Hero />
-        <ProjectsGrid />
+        <FeaturedWork />
+        <LabList />
         <Footer />
       </div>
     </main>

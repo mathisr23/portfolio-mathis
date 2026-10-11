@@ -9,17 +9,30 @@
         "subtitle": "Selected Projects & Experiments",
         "viewProjects": "View Projects"
     },
-    "projects": {
-        "viewProject": "View Project",
-        "descriptions": {
-            "museum500": "An interactive museum chronicling five infamous software failures that shaped the industry — from Therac-25 to CrowdStrike.",
-            "coupleCalendar": "Shared calendar app for couples to plan events and sync schedules together.",
-            "atelierLvy": "Branding & creative studio website built for Atelier Lvy.",
-            "stillLooking": "My personal chronicle of the first-job search, an honest look at what junior developers go through today.",
-            "moodTime": "Mood tracking app with visual analytics to monitor emotional patterns over time.",
-            "pokeGacha": "Fun Pokémon gacha game where you collect and discover random Pokémon.",
-            "unemployedCountup": "Satirical timer counting the seconds since unemployment, made with dark humor."
+    "work": {
+        "featuredLabel": "Selected Work",
+        "labLabel": "Lab",
+        "labIntro": "Experiments, games and side projects.",
+        "viewCaseStudy": "View case study",
+        "opensNewTab": "Opens in new tab",
+        "kinds": {
+            "concept": "Concept",
+            "client": "Client",
+            "experiment": "Experiment"
         }
+    },
+    "caseStudy": {
+        "back": "All work",
+        "role": "Role",
+        "year": "Year",
+        "type": "Type",
+        "stack": "Stack",
+        "overview": "Overview",
+        "highlights": "Highlights",
+        "visit": "Visit live site",
+        "source": "View source",
+        "notLive": "Live version coming soon",
+        "next": "Next project"
     },
     "about": {
         "label": "About Me",

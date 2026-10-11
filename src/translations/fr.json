@@ -9,17 +9,30 @@
         "subtitle": "Projets sélectionnés & Expérimentations",
         "viewProjects": "Voir les projets"
     },
-    "projects": {
-        "viewProject": "Voir le projet",
-        "descriptions": {
-            "museum500": "Un musée interactif retraçant cinq pannes logicielles devenues légendaires, du Therac-25 à CrowdStrike.",
-            "coupleCalendar": "Application de calendrier partagé pour couples, pour planifier des événements ensemble.",
-            "atelierLvy": "Site web de branding et studio créatif réalisé pour Atelier Lvy.",
-            "stillLooking": "Ma chronique de la recherche d'un premier emploi, un regard personnel sur ce que vivent les développeurs juniors aujourd'hui.",
-            "moodTime": "Application de suivi d'humeur avec analyses visuelles pour observer les tendances émotionnelles.",
-            "pokeGacha": "Jeu gacha Pokémon fun où vous collectionnez et découvrez des Pokémon aléatoires.",
-            "unemployedCountup": "Timer satirique comptant les secondes de chômage, avec un humour noir assumé."
+    "work": {
+        "featuredLabel": "Projets sélectionnés",
+        "labLabel": "Lab",
+        "labIntro": "Expérimentations, jeux et projets annexes.",
+        "viewCaseStudy": "Voir l'étude de cas",
+        "opensNewTab": "S'ouvre dans un nouvel onglet",
+        "kinds": {
+            "concept": "Concept",
+            "client": "Client",
+            "experiment": "Expérimentation"
         }
+    },
+    "caseStudy": {
+        "back": "Tous les projets",
+        "role": "Rôle",
+        "year": "Année",
+        "type": "Type",
+        "stack": "Stack",
+        "overview": "Aperçu",
+        "highlights": "Points clés",
+        "visit": "Voir le site",
+        "source": "Voir le code",
+        "notLive": "Version en ligne bientôt disponible",
+        "next": "Projet suivant"
     },
     "about": {
         "label": "À propos de moi",
