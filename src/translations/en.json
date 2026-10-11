@@ -2,25 +2,27 @@
     "nav": {
         "work": "Work",
         "about": "About",
-        "contact": "Contact"
+        "contact": "Contact",
+        "label": "Main",
+        "language": "Language",
+        "switchTo": "Passer en français"
     },
     "hero": {
-        "label": "Creative front-end developer",
         "statement": "I build cinematic, scroll-driven web experiences: 3D, motion and interfaces that feel alive.",
-        "availability": "Open to full-time roles · France / Remote",
-        "viewProjects": "Selected work"
+        "availability": "Open to full-time roles, in France or remote."
     },
     "work": {
-        "featuredLabel": "Selected Work",
-        "labLabel": "Lab",
-        "labIntro": "Experiments, games and side projects.",
-        "viewCaseStudy": "View case study",
-        "opensNewTab": "Opens in new tab",
         "kinds": {
             "concept": "Concept",
             "client": "Client",
             "experiment": "Experiment"
-        }
+        },
+        "heading": "Work"
+    },
+    "reel": {
+        "caseStudy": "Read the case study",
+        "openSite": "Open the site",
+        "index": "All projects"
     },
     "caseStudy": {
         "back": "All work",
@@ -36,7 +38,6 @@
         "next": "Next project"
     },
     "about": {
-        "label": "About",
         "intro": "I'm Mathis, a front-end developer based in France. I build websites that behave more like films than documents: scroll-driven 3D, motion, and type that reacts to you.",
         "items": [
             {
@@ -71,15 +72,21 @@
         "openEmail": "Open Email",
         "linkedin": "LinkedIn",
         "github": "GitHub",
-        "location": "Based in France (CET) · Open to remote"
+        "location": "Based in France (CET), open to remote work."
+    },
+    "contactMail": {
+        "subject": "Hello from your portfolio",
+        "body": "Hi Mathis,\n\nI came across your portfolio and wanted to reach out.\n\n\n\nBest,"
     },
     "footer": {
-        "titlePart1": "Let's build something",
-        "titlePart2": "people remember",
-        "subtitle": "Hiring a front-end developer, or have a project in mind? My inbox is open.",
-        "cta": "Get in touch",
         "colophon": "Designed and built by Mathis Rivière with Next.js, Three.js and Framer Motion.",
-        "copyright": "© 2026 Mathis Rivière"
+        "copyright": "© 2026 Mathis Rivière",
+        "prompt": "Hiring a front-end developer, or have a project in mind? Write to me."
+    },
+    "notFound": {
+        "label": "Reality_Not_Found",
+        "text": "The page you are looking for has been lost in the digital void.",
+        "back": "Return to Base"
     },
     "meta": {
         "title": "Mathis Rivière — Creative Front-end Developer",
@@ -87,14 +94,5 @@
         "about": "About",
         "contact": "Contact",
         "skip": "Skip to main content"
-    },
-    "contactMail": {
-        "subject": "Hello from your portfolio",
-        "body": "Hi Mathis,\n\nI came across your portfolio and wanted to reach out.\n\n\n\nBest,"
-    },
-    "notFound": {
-        "label": "Reality_Not_Found",
-        "text": "The page you are looking for has been lost in the digital void.",
-        "back": "Return to Base"
     }
 }

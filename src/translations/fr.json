@@ -2,25 +2,27 @@
     "nav": {
         "work": "Projets",
         "about": "À propos",
-        "contact": "Contact"
+        "contact": "Contact",
+        "label": "Principale",
+        "language": "Langue",
+        "switchTo": "Switch to English"
     },
     "hero": {
-        "label": "Développeur front-end créatif",
         "statement": "Je crée des expériences web cinématiques pilotées au scroll : 3D, motion et interfaces vivantes.",
-        "availability": "Ouvert aux postes en CDI · France / Remote",
-        "viewProjects": "Projets sélectionnés"
+        "availability": "Ouvert aux postes en CDI, en France ou en remote."
     },
     "work": {
-        "featuredLabel": "Projets sélectionnés",
-        "labLabel": "Lab",
-        "labIntro": "Expérimentations, jeux et projets annexes.",
-        "viewCaseStudy": "Voir l'étude de cas",
-        "opensNewTab": "S'ouvre dans un nouvel onglet",
         "kinds": {
             "concept": "Concept",
             "client": "Client",
             "experiment": "Expérimentation"
-        }
+        },
+        "heading": "Projets"
+    },
+    "reel": {
+        "caseStudy": "Lire l'étude de cas",
+        "openSite": "Ouvrir le site",
+        "index": "Tous les projets"
     },
     "caseStudy": {
         "back": "Tous les projets",
@@ -36,7 +38,6 @@
         "next": "Projet suivant"
     },
     "about": {
-        "label": "À propos",
         "intro": "Je suis Mathis, développeur front-end basé en France. Je crée des sites qui se comportent plus comme des films que comme des documents : 3D pilotée au scroll, motion, et typographie qui réagit.",
         "items": [
             {
@@ -71,15 +72,21 @@
         "openEmail": "Ouvrir l'e-mail",
         "linkedin": "LinkedIn",
         "github": "GitHub",
-        "location": "Basé en France (CET) · Ouvert au remote"
+        "location": "Basé en France (CET), ouvert au remote."
+    },
+    "contactMail": {
+        "subject": "Bonjour depuis votre portfolio",
+        "body": "Bonjour Mathis,\n\nJ'ai découvert votre portfolio et je souhaitais vous contacter.\n\n\n\nCordialement,"
     },
     "footer": {
-        "titlePart1": "Créons quelque chose",
-        "titlePart2": "de mémorable",
-        "subtitle": "Vous recrutez un développeur front-end, ou vous avez un projet en tête ? Ma boîte mail est ouverte.",
-        "cta": "Me contacter",
         "colophon": "Conçu et développé par Mathis Rivière avec Next.js, Three.js et Framer Motion.",
-        "copyright": "© 2026 Mathis Rivière"
+        "copyright": "© 2026 Mathis Rivière",
+        "prompt": "Vous recrutez un développeur front-end, ou vous avez un projet en tête ? Écrivez-moi."
+    },
+    "notFound": {
+        "label": "Reality_Not_Found",
+        "text": "La page que vous cherchez s'est perdue dans le vide numérique.",
+        "back": "Retour à l'accueil"
     },
     "meta": {
         "title": "Mathis Rivière — Développeur Front-end Créatif",
@@ -87,14 +94,5 @@
         "about": "À propos",
         "contact": "Contact",
         "skip": "Aller au contenu principal"
-    },
-    "contactMail": {
-        "subject": "Bonjour depuis votre portfolio",
-        "body": "Bonjour Mathis,\n\nJ'ai découvert votre portfolio et je souhaitais vous contacter.\n\n\n\nCordialement,"
-    },
-    "notFound": {
-        "label": "Reality_Not_Found",
-        "text": "La page que vous cherchez s'est perdue dans le vide numérique.",
-        "back": "Retour à l'accueil"
     }
 }

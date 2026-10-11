@@ -1,73 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import NavItem from "@/components/NavItem";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+type Tone = "snow" | "ink";
+
+/**
+ * One line of navigation. Its colour follows whatever section sits under it:
+ * sections declare `data-nav-tone="snow"` when they are dark, otherwise it is ink.
+ */
 export default function Navbar() {
-    const { t, href } = useLanguage();
-    const navItems = [
-        { label: t.nav.work, href: href("/#work") },
-        { label: t.nav.about, href: href("/about") },
-        { label: t.nav.contact, href: href("/contact") },
-    ];
-    const [scrolled, setScrolled] = useState(false);
+    const { t, href, language, setLanguage } = useLanguage();
+    const pathname = usePathname();
+    const [tone, setTone] = useState<Tone>("ink");
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 60);
+        let raf = 0;
+        const update = () => {
+            raf = 0;
+            const probe = 32; // roughly the nav's vertical centre
+            let next: Tone = "ink";
+            document.querySelectorAll<HTMLElement>("[data-nav-tone]").forEach((el) => {
+                const r = el.getBoundingClientRect();
+                if (r.top <= probe && r.bottom > probe) next = el.dataset.navTone as Tone;
+            });
+            setTone(next);
+        };
+        const onScroll = () => {
+            if (!raf) raf = requestAnimationFrame(update);
+        };
+        update();
         window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+        window.addEventListener("resize", onScroll);
+        return () => {
+            cancelAnimationFrame(raf);
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onScroll);
+        };
+    }, [pathname]);
+
+    const links = [
+        { label: t.nav.work, to: href("/#work") },
+        { label: t.nav.about, to: href("/about") },
+        { label: t.nav.contact, to: href("/contact") },
+    ];
+    const other = language === "en" ? "fr" : "en";
 
     return (
-        <motion.header
-            role="banner"
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-            className="fixed top-0 left-0 w-full z-50"
+        <header
+            className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+                tone === "snow" ? "text-snow" : "text-ink"
+            }`}
         >
-            <div
-                className="flex items-center justify-between px-8 pl-8 pr-8 md:pl-14 md:pr-36 py-5 transition-all duration-500"
-                style={{
-                    background: scrolled
-                        ? "rgba(10, 10, 11, 0.88)"
-                        : "transparent",
-                    backdropFilter: scrolled ? "blur(24px)" : "none",
-                    WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
-                }}
-            >
-                {/* Brand mark */}
-                <a
-                    href={href("/")}
-                    className="nav-brand hoverable"
-                    aria-label="Mathis Rivière — Home"
-                >
-                    MR.
-                </a>
+            <div className="flex items-baseline justify-between gap-6 px-5 md:px-10 py-5 font-display text-[0.95rem] md:text-base">
+                <Link href={href("/")} className="font-medium tracking-tight whitespace-nowrap">
+                    <span className="hidden sm:inline">Mathis Rivière</span>
+                    <span className="sm:hidden" aria-label="Mathis Rivière">
+                        M. Rivière
+                    </span>
+                </Link>
 
-                {/* Navigation */}
-                <nav aria-label="Main navigation">
-                    <ul className="flex items-center gap-0" role="list">
-                        {navItems.map((item, index) => (
-                            <li key={item.href}>
-                                <NavItem label={item.label} href={item.href} index={index} />
-                            </li>
-                        ))}
+                <nav aria-label={t.nav.label}>
+                    <ul className="flex items-baseline gap-4 md:gap-8">
+                        {links.map((link) => {
+                            const current = !link.to.includes("#") && pathname === link.to;
+                            return (
+                                <li key={link.to}>
+                                    <Link
+                                        href={link.to}
+                                        aria-current={current ? "page" : undefined}
+                                        className={current ? "link-line" : "opacity-70 hover:opacity-100 transition-opacity"}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                        <li>
+                            {/* Same style as the links: the current language is plain, the other is the action */}
+                            <span className="sr-only">{t.nav.language}: </span>
+                            <span aria-current="true" className="uppercase">
+                                {language}
+                            </span>
+                            <span aria-hidden="true" className="opacity-40 mx-1">
+                                /
+                            </span>
+                            <button
+                                type="button"
+                                onClick={() => setLanguage(other)}
+                                lang={other}
+                                className="uppercase opacity-70 hover:opacity-100 transition-opacity"
+                                aria-label={t.nav.switchTo}
+                            >
+                                {other}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
             </div>
-
-            {/* Hairline border on scroll */}
-            <div
-                className="absolute bottom-0 left-0 w-full h-px transition-opacity duration-500 pointer-events-none"
-                style={{
-                    background: "linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.25) 40%, rgba(139, 92, 246, 0.25) 60%, transparent 100%)",
-                    opacity: scrolled ? 1 : 0,
-                }}
-                aria-hidden="true"
-            />
-        </motion.header>
+        </header>
     );
 }

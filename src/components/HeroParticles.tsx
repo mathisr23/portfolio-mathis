@@ -28,9 +28,10 @@ void main(){
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
   float soft = smoothstep(0.5, 0.15, d);
-  vec3 white = vec3(0.96, 0.96, 0.98);
-  vec3 violet = vec3(0.62, 0.45, 1.0);
-  vec3 col = mix(white, violet, clamp(vEnergy * 1.6, 0.0, 1.0));
+  // Snow at rest, ink while being pushed around
+  vec3 snow = vec3(0.98, 0.98, 0.98);
+  vec3 ink = vec3(0.05, 0.055, 0.07);
+  vec3 col = mix(snow, ink, clamp(vEnergy * 1.6, 0.0, 1.0));
   gl_FragColor = vec4(col, soft * vAlpha * uOpacity);
 }
 `;
@@ -55,7 +56,14 @@ interface Field {
 function sampleHeading(heading: HTMLElement, host: DOMRect, maxCount: number): Float32Array {
     const style = getComputedStyle(heading);
     const fontSize = parseFloat(style.fontSize);
-    const font = `${style.fontStyle} ${style.fontWeight} ${fontSize}px ${style.fontFamily}`;
+    // Canvas only takes width as a keyword, so map the CSS percentage onto the nearest one
+    const stretchPct = parseFloat(style.fontStretch) || 100;
+    const stretches: [number, CanvasFontStretch][] = [
+        [50, "ultra-condensed"], [62.5, "extra-condensed"], [75, "condensed"], [87.5, "semi-condensed"],
+        [100, "normal"], [112.5, "semi-expanded"], [125, "expanded"], [150, "extra-expanded"], [200, "ultra-expanded"],
+    ];
+    const stretch = stretches.reduce((a, b) => (Math.abs(b[0] - stretchPct) < Math.abs(a[0] - stretchPct) ? b : a))[1];
+    const font = `${style.fontStyle} ${style.fontWeight} ${stretch} ${fontSize}px ${style.fontFamily}`;
     const letterSpacing = style.letterSpacing === "normal" ? "0px" : style.letterSpacing;
 
     const canvas = document.createElement("canvas");
@@ -65,6 +73,7 @@ function sampleHeading(heading: HTMLElement, host: DOMRect, maxCount: number): F
     if (!ctx) return new Float32Array();
 
     ctx.font = font;
+    if ("fontStretch" in ctx) ctx.fontStretch = stretch;
     if ("letterSpacing" in ctx) ctx.letterSpacing = letterSpacing;
     ctx.fillStyle = "#fff";
     ctx.textBaseline = "alphabetic";

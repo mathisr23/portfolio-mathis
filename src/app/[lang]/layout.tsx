@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Cormorant_Garamond, Syne, Space_Mono } from "next/font/google";
+import { Anybody, Newsreader } from "next/font/google";
 import "../globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import LanguageToggle from "@/components/LanguageToggle";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { alternatesFor, isLocale, locales } from "@/lib/i18n";
@@ -12,26 +11,21 @@ import { siteUrl } from "@/lib/site";
 import en from "@/translations/en.json";
 import fr from "@/translations/fr.json";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-serif",
+// Display + interface: variable width is part of the motion language
+const anybody = Anybody({
+  variable: "--nf-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600"],
+  axes: ["wdth"],
+});
+
+// Reading text
+const newsreader = Newsreader({
+  variable: "--nf-text",
+  subsets: ["latin"],
+  display: "swap",
   style: ["normal", "italic"],
-});
-
-const syne = Syne({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "700"],
+  axes: ["opsz"],
 });
 
 type Props = { params: Promise<{ lang: string }> };
@@ -73,16 +67,15 @@ export default async function RootLayout({
   const t = lang === "fr" ? fr : en;
 
   return (
-    <html lang={lang} className="dark">
+    <html lang={lang}>
       <body
-        className={`${cormorant.variable} ${syne.variable} ${spaceMono.variable} antialiased bg-[#0a0a0b] text-white overflow-x-hidden`}
+        className={`${anybody.variable} ${newsreader.variable} antialiased`}
       >
         <a href="#main-content" className="skip-link">
           {t.meta.skip}
         </a>
         <LanguageProvider language={lang}>
           <SmoothScroll />
-          <LanguageToggle />
           {children}
           <Analytics />
           <SpeedInsights />

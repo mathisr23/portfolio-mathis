@@ -3,74 +3,31 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Navbar from "@/components/Navbar";
+import StretchText from "@/components/StretchText";
 
 export default function NotFound() {
     const { t, href } = useLanguage();
 
     return (
-        <div className="relative h-screen w-full flex flex-col items-center justify-center bg-[#0a0a0b] text-white overflow-hidden">
-            {/* Glitch Effect Background */}
-            <div className="absolute inset-0 pointer-events-none opacity-20">
-                <div
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{ opacity: 0.1 }}
-                />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 text-center px-4">
-                <motion.h1
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease: "backOut" }}
-                    className="text-[clamp(6rem,20vw,12rem)] font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10"
-                >
+        <main id="main-content" className="min-h-[100svh] flex flex-col justify-end px-5 md:px-10 pb-12">
+            <Navbar />
+            <motion.h1
+                initial="rest"
+                animate="rest"
+                whileHover="hover"
+                className="font-extrabold leading-[0.8] tracking-[-0.04em] text-[length:clamp(8rem,38vw,34rem)]"
+            >
+                <StretchText from={60} to={150}>
                     404
-                </motion.h1>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                    <p className="text-xl md:text-2xl text-purple-400 mb-8 font-mono">
-                        {t.notFound.label}
-                    </p>
-
-                    <p className="text-white/40 mb-12 max-w-md mx-auto">
-                        {t.notFound.text}
-                    </p>
-
-                    <Link
-                        href={href("/")}
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 group"
-                    >
-                        <span className="text-sm font-medium">{t.notFound.back}</span>
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="group-hover:translate-x-1 transition-transform"
-                        >
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </Link>
-                </motion.div>
+                </StretchText>
+            </motion.h1>
+            <div className="mt-8 flex flex-col md:flex-row md:items-baseline md:justify-between gap-4">
+                <p className="text-2xl max-w-[30ch]">{t.notFound.text}</p>
+                <Link href={href("/")} className="font-display text-xl link-line self-start">
+                    {t.notFound.back}
+                </Link>
             </div>
-
-            {/* Decorative Grid */}
-            <div
-                className="absolute inset-0 z-0 opacity-20 pointer-events-none"
-                style={{
-                    backgroundImage: "linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)",
-                    backgroundSize: "40px 40px",
-                }}
-            />
-        </div>
+        </main>
     );
 }

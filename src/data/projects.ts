@@ -22,6 +22,8 @@ export interface FeaturedProject {
 
 export interface LabProject {
     title: string;
+    /** What it is, in a word or two */
+    label: Localized;
     stack: string[];
     image: string;
     link: string;
@@ -214,6 +216,7 @@ export const featuredProjects: FeaturedProject[] = [
 export const labProjects: LabProject[] = [
     {
         title: "RNG Reliques",
+        label: { en: "Browser game", fr: "Jeu navigateur" },
         stack: ["Vite", "Three.js"],
         image: "/work/rng-reliques-cover.webp",
         link: "https://rng-reliques.vercel.app/",
@@ -224,6 +227,7 @@ export const labProjects: LabProject[] = [
     },
     {
         title: "Still Looking",
+        label: { en: "Personal chronicle", fr: "Chronique personnelle" },
         stack: ["Next.js", "GSAP"],
         image: "/work/still-looking-cover.webp",
         link: "https://still-looking.vercel.app/",
@@ -234,6 +238,7 @@ export const labProjects: LabProject[] = [
     },
     {
         title: "PokéGacha",
+        label: { en: "Browser game", fr: "Jeu navigateur" },
         stack: ["React", "Vite"],
         image: "/work/pokegacha-cover.webp",
         link: "https://poke-gacha-ui.vercel.app/",
@@ -244,6 +249,7 @@ export const labProjects: LabProject[] = [
     },
     {
         title: "UnemployedCountup",
+        label: { en: "Satire", fr: "Satire" },
         stack: ["HTML", "CSS", "JavaScript"],
         image: "/work/unemployed-countup-cover.webp",
         link: "https://unemployed-countup.vercel.app/",
@@ -253,6 +259,30 @@ export const labProjects: LabProject[] = [
         },
     },
 ];
+
+export type ReelItem =
+    | { type: "featured"; project: FeaturedProject }
+    | { type: "lab"; project: LabProject };
+
+// One sequence for the whole body of work, alternating weight so the reel keeps its rhythm
+const reelOrder = [
+    "Aetherius",
+    "Nocturne",
+    "RNG Reliques",
+    "Museum of 500",
+    "Atelier Lvy",
+    "Still Looking",
+    "PokéGacha",
+    "UnemployedCountup",
+];
+
+export const reel: ReelItem[] = reelOrder.map((title) => {
+    const featured = featuredProjects.find((p) => p.title === title);
+    if (featured) return { type: "featured", project: featured };
+    const lab = labProjects.find((p) => p.title === title);
+    if (!lab) throw new Error(`Unknown project in reel: ${title}`);
+    return { type: "lab", project: lab };
+});
 
 export function getFeaturedProject(slug: string) {
     return featuredProjects.find((p) => p.slug === slug);
