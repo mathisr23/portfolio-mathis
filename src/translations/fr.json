@@ -43,28 +43,72 @@
         "challenge": "Le plus difficile"
     },
     "about": {
-        "intro": "Je suis Mathis, développeur front-end basé en France. Je crée des sites qui se comportent plus comme des films que comme des documents : 3D pilotée au scroll, motion, et typographie qui réagit.",
+        "intro": "Je suis Mathis, développeur front-end basé près de Paris. J'ai passé deux ans chez Thales à concevoir des interfaces pour la Marine nationale, puis je suis passé en freelance pour créer des sites qui bougent : 3D pilotée au scroll, motion, et typographie qui réagit.",
+        "photoAlt": "Portrait de Mathis Rivière",
+        "cv": "Télécharger mon CV (PDF)",
+        "experienceHeading": "Expérience",
+        "experience": [
+            {
+                "period": "2024–2026",
+                "role": "Développeur front-end freelance",
+                "detail": "Interfaces React et Next.js en TypeScript, animations GSAP, Supabase et Prisma, déploiement sur Vercel."
+            },
+            {
+                "period": "2023–2024",
+                "role": "Développeur front-end, Thales",
+                "detail": "Alternance dans une équipe de dix en Scrum. Configuration et surveillance du système de communication des frégates de la Marine nationale : synoptiques interactifs des équipements embarqués, interfaces de configuration et tableaux de bord de supervision, en Angular et Java."
+            },
+            {
+                "period": "2022–2023",
+                "role": "Développeur, Thales",
+                "detail": "Une interface de configuration et de déploiement de l'environnement de simulation."
+            },
+            {
+                "period": "2022",
+                "role": "Stagiaire développeur front-end, Malakoff Humanis",
+                "detail": "Six mois de correction de bugs et d'optimisation du front-end de deux applications internes Angular."
+            },
+            {
+                "period": "2021",
+                "role": "Stagiaire développeur, Nokia",
+                "detail": "Trois mois sur un site d'administration de profils utilisateurs en C# et ASP.NET."
+            }
+        ],
+        "educationHeading": "Formation",
+        "education": [
+            {
+                "period": "2022–2024",
+                "role": "Mastère Ingénierie Web et Innovations Digitales, IIM",
+                "detail": ""
+            },
+            {
+                "period": "2019–2022",
+                "role": "Bachelor Développement Web et Mobile, IIM",
+                "detail": "Dont un semestre à l'étranger au Dorset College, Dublin."
+            }
+        ],
+        "principlesHeading": "Ma façon de travailler",
         "items": [
             {
-                "number": "01",
-                "title": "Le scroll comme caméra",
-                "description": "Dans Aetherius, tout le site est un seul mouvement de caméra dans la brume. Dans Nocturne, une forme chromée vous suit d'une section à l'autre. J'aime faire du scroll une mise en scène, pas seulement une navigation."
+                "title": "Du motion qui a une raison",
+                "description": "Une animation doit expliquer quelque chose : où l'on est, ce qui a changé, où regarder ensuite. Si elle ne fait que décorer, elle disparaît."
             },
             {
-                "number": "02",
-                "title": "Construit, pas importé",
-                "description": "Je préfère fabriquer plutôt que télécharger. Les silhouettes d'Aetherius sont générées en code, anneau par anneau, et le nom en haut de ce site est fait de milliers de particules échantillonnées depuis le titre lui-même."
+                "title": "Construit comme un logiciel de production",
+                "description": "Deux ans dans une équipe en entreprise m'ont appris la revue de code, l'intégration continue et les tickets qu'on ferme vraiment. Le travail créatif mérite la même rigueur."
             },
             {
-                "number": "03",
-                "title": "De vrais clients, de vraies contraintes",
-                "description": "Atelier Lvy est l'activité d'une artiste céramiste, pas un concept. Le livrer m'a appris que la réservation et la lisibilité passent avant les effets."
-            },
-            {
-                "number": "04",
-                "title": "De petits projets, terminés",
-                "description": "Certains projets sont juste pour le plaisir : un jeu de dés envoyé à des amis, un gacha Pokémon, un compteur pour ma propre recherche d'emploi. C'est en terminant de petites choses que j'apprends le plus."
+                "title": "Apprendre en construisant",
+                "description": "Mes projets personnels sont l'endroit où j'essaie ce que je n'ai jamais utilisé. C'est en les terminant que j'apprends le plus."
             }
+        ],
+        "toolboxHeading": "Outils",
+        "toolbox": "TypeScript, JavaScript, React, Next.js, Angular, Vue, GSAP, Framer Motion, Three.js, Tailwind CSS, Supabase, Prisma, Java, Python, Figma, Git, Jenkins, Jira, Robot Framework.",
+        "offScreenHeading": "Hors écran",
+        "offScreen": [
+            "Ancien joueur compétitif de Rocket League, top 100 mondial en 3v3.",
+            "Voyages en Islande, Thaïlande, Vietnam, Tunisie, Grèce, aux États-Unis et en Irlande.",
+            "Français (natif), anglais (B2), espagnol (A2)."
         ]
     },
     "contact": {

@@ -20,6 +20,8 @@ export default function Navbar() {
     const pathname = usePathname();
     const reduce = useReducedMotion();
     const [tone, setTone] = useState<Tone>("ink");
+    // Translucent copy of the section underneath, once the page has scrolled
+    const [backdrop, setBackdrop] = useState<string | null>(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const menuButtonRef = useRef<HTMLButtonElement>(null);
     const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
@@ -30,11 +32,16 @@ export default function Navbar() {
             raf = 0;
             const probe = 32; // roughly the nav's vertical centre
             let next: Tone = "ink";
+            let ground = "var(--paper)";
             document.querySelectorAll<HTMLElement>("[data-nav-tone]").forEach((el) => {
                 const r = el.getBoundingClientRect();
-                if (r.top <= probe && r.bottom > probe) next = el.dataset.navTone as Tone;
+                if (r.top <= probe && r.bottom > probe) {
+                    next = el.dataset.navTone as Tone;
+                    ground = getComputedStyle(el).backgroundColor;
+                }
             });
             setTone(next);
+            setBackdrop(window.scrollY > 8 ? `color-mix(in srgb, ${ground} 86%, transparent)` : null);
         };
         const onScroll = () => {
             if (!raf) raf = requestAnimationFrame(update);
@@ -104,9 +111,10 @@ export default function Navbar() {
     return (
         <>
             <header
-                className={`site-nav fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+                className={`site-nav fixed inset-x-0 top-0 z-50 transition-[color,background-color] duration-500 ${
                     tone === "snow" ? "text-snow" : "text-ink"
-                }`}
+                } ${backdrop ? "backdrop-blur-md" : ""}`}
+                style={{ backgroundColor: backdrop ?? "transparent" }}
             >
                 <div className="flex items-baseline justify-between gap-6 px-5 md:px-10 py-5 font-display text-base">
                     <Link href={href("/")} className="font-medium tracking-tight whitespace-nowrap">

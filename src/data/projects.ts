@@ -221,10 +221,10 @@ const id = setTimeout(() => sound.say(VOICE[chapter]), 650);`,
                 },
             },
             {
-                title: { en: "Outside the React comfort zone", fr: "Hors de la zone de confort React" },
+                title: { en: "Angular meets WebGL", fr: "Angular rencontre WebGL" },
                 body: {
-                    en: "Built with Angular, Three.js and GSAP to learn a different framework on a project worth finishing.",
-                    fr: "Construit avec Angular, Three.js et GSAP pour apprendre un autre framework sur un projet qui valait d'être terminé.",
+                    en: "Built with Angular, the framework I used for two years at Thales, paired with Three.js and GSAP for the 3D and the motion.",
+                    fr: "Construit avec Angular, le framework que j'ai utilisé pendant deux ans chez Thales, associé à Three.js et GSAP pour la 3D et le motion.",
                 },
             },
         ],

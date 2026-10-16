@@ -43,28 +43,72 @@
         "challenge": "The hard part"
     },
     "about": {
-        "intro": "I'm Mathis, a front-end developer based in France. I build websites that behave more like films than documents: scroll-driven 3D, motion, and type that reacts to you.",
+        "intro": "I'm Mathis, a front-end developer based near Paris. I spent two years at Thales building interfaces for the French Navy, then went freelance to make websites that move: scroll-driven 3D, motion, and type that reacts to you.",
+        "photoAlt": "Portrait of Mathis Rivière",
+        "cv": "Download my CV (PDF, in French)",
+        "experienceHeading": "Experience",
+        "experience": [
+            {
+                "period": "2024–2026",
+                "role": "Freelance front-end developer",
+                "detail": "React and Next.js interfaces in TypeScript, GSAP animation, Supabase and Prisma, deployed on Vercel."
+            },
+            {
+                "period": "2023–2024",
+                "role": "Front-end developer, Thales",
+                "detail": "Apprenticeship in a team of ten working in Scrum. Configuration and monitoring of the communication system of French Navy frigates: interactive diagrams of onboard equipment, configuration screens and supervision dashboards, in Angular and Java."
+            },
+            {
+                "period": "2022–2023",
+                "role": "Developer, Thales",
+                "detail": "An interface to configure and deploy the simulation environment."
+            },
+            {
+                "period": "2022",
+                "role": "Front-end intern, Malakoff Humanis",
+                "detail": "Six months fixing bugs and optimising the front end of two internal Angular applications."
+            },
+            {
+                "period": "2021",
+                "role": "Developer intern, Nokia",
+                "detail": "Three months on a user profile administration site in C# and ASP.NET."
+            }
+        ],
+        "educationHeading": "Education",
+        "education": [
+            {
+                "period": "2022–2024",
+                "role": "Master's in Web Engineering and Digital Innovation, IIM",
+                "detail": ""
+            },
+            {
+                "period": "2019–2022",
+                "role": "Bachelor's in Web and Mobile Development, IIM",
+                "detail": "Including a semester abroad at Dorset College, Dublin."
+            }
+        ],
+        "principlesHeading": "How I work",
         "items": [
             {
-                "number": "01",
-                "title": "Scroll as a camera",
-                "description": "In Aetherius the whole site is one camera move through fog. In Nocturne a chrome form follows you from section to section. I like turning scrolling into direction, not just navigation."
+                "title": "Motion with a reason",
+                "description": "Animation should explain something: where you are, what changed, what to look at next. If it only decorates, it goes."
             },
             {
-                "number": "02",
-                "title": "Built, not imported",
-                "description": "I'd rather make it than download it. The figures in Aetherius are generated in code, ring by ring, and the name at the top of this site is thousands of particles sampled from the heading itself."
+                "title": "Built like production software",
+                "description": "Two years in an enterprise team taught me code review, continuous integration and tickets that actually get closed. Creative work gets the same discipline."
             },
             {
-                "number": "03",
-                "title": "Real clients, real constraints",
-                "description": "Atelier Lvy is a ceramic artist's business, not a concept. Shipping it taught me that bookings and readability come before effects."
-            },
-            {
-                "number": "04",
-                "title": "Small things, finished",
-                "description": "Some projects are just for fun: a dice game I sent to friends, a Pokémon gacha, a counter for my own job search. Finishing small things is how I learn the most."
+                "title": "Learning by building",
+                "description": "Personal projects are where I try what I haven't used yet. Finishing them is how I learn the most."
             }
+        ],
+        "toolboxHeading": "Toolbox",
+        "toolbox": "TypeScript, JavaScript, React, Next.js, Angular, Vue, GSAP, Framer Motion, Three.js, Tailwind CSS, Supabase, Prisma, Java, Python, Figma, Git, Jenkins, Jira, Robot Framework.",
+        "offScreenHeading": "Off screen",
+        "offScreen": [
+            "Former competitive Rocket League player, top 100 worldwide in 3v3.",
+            "Travelled to Iceland, Thailand, Vietnam, Tunisia, Greece, the United States and Ireland.",
+            "French (native), English (B2), Spanish (A2)."
         ]
     },
     "contact": {
