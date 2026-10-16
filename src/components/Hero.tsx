@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -17,6 +17,25 @@ export default function Hero() {
     const shouldReduceMotion = useReducedMotion() ?? false;
     const headingRef = useRef<HTMLHeadingElement>(null);
     const [particlesOn, setParticlesOn] = useState(false);
+    // When to mount the particle layer, and how long it should still wait before taking over
+    const [particles, setParticles] = useState<{ delay: number } | null>(null);
+
+    // three.js is heavy: fetch it only once the browser is idle after the first paint,
+    // and never under data saver. The takeover still lands when the text reveal ends.
+    useEffect(() => {
+        if (shouldReduceMotion) return;
+        const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+        if (connection?.saveData) return;
+        const start = performance.now();
+        const load = () => setParticles({ delay: Math.max(0, REVEAL_END_MS - (performance.now() - start)) });
+        if ("requestIdleCallback" in window) {
+            const id = window.requestIdleCallback(load, { timeout: 2500 });
+            return () => window.cancelIdleCallback(id);
+        }
+        // Safari has no requestIdleCallback
+        const id = globalThis.setTimeout(load, 1200);
+        return () => globalThis.clearTimeout(id);
+    }, [shouldReduceMotion]);
     const handleParticlesReady = useCallback(() => setParticlesOn(true), []);
 
     const line = (text: string, delay: number) => (
@@ -41,11 +60,11 @@ export default function Hero() {
             aria-labelledby="hero-heading"
         >
             {/* Particle name — decorative layer over the real h1 */}
-            {!shouldReduceMotion && (
+            {particles && (
                 <div className="absolute inset-0 z-[5] pointer-events-none" aria-hidden="true">
                     <HeroParticles
                         targetRef={headingRef}
-                        startDelay={REVEAL_END_MS}
+                        startDelay={particles.delay}
                         onReady={handleParticlesReady}
                     />
                 </div>

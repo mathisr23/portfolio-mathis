@@ -5,7 +5,7 @@
   --signal: #2633ff; /* hero + contact ground */
   --paper: #e7e8ea; /* reading + reel ground */
   --ink: #0d0e12; /* text on paper, footer ground */
-  --grey: #75777e; /* secondary text on paper */
+  --grey: #5f6168; /* secondary text on paper, 5.2:1 */
   --mist: #c9cbd0; /* rules on paper */
   --snow: #fafafa; /* text on signal / ink */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

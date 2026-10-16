@@ -189,7 +189,8 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
                                             poster={info.image}
                                             video={info.video}
                                             playing
-                                            sizes="75vw"
+                                            // Same candidate as the mobile frame below 768px, so a phone downloads it once
+                                            sizes="(min-width: 768px) 75vw, calc(100vw - 2.5rem)"
                                             priority={index === 0}
                                         />
                                     </motion.div>
@@ -284,13 +285,24 @@ function MobileReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
     return (
         <ol className="md:hidden px-5 pt-16 pb-8 flex flex-col gap-20">
             {items.map((info, i) => (
-                <MobileItem key={info.title} info={info} position={i + 1} reduce={reduce} />
+                <MobileItem key={info.title} info={info} position={i + 1} reduce={reduce} first={i === 0} />
             ))}
         </ol>
     );
 }
 
-function MobileItem({ info, position, reduce }: { info: Info; position: number; reduce: boolean }) {
+function MobileItem({
+    info,
+    position,
+    reduce,
+    first,
+}: {
+    info: Info;
+    position: number;
+    reduce: boolean;
+    /** Already on screen at load on phones: shown at once, it is the page's largest paint */
+    first: boolean;
+}) {
     const frameRef = useRef<HTMLDivElement>(null);
     // Only the loop that is mostly on screen plays, so a phone never runs several at once
     const playing = useInView(frameRef, { amount: 0.6 });
@@ -301,7 +313,7 @@ function MobileItem({ info, position, reduce }: { info: Info; position: number; 
                 {/* Observe the unclipped wrapper: a fully clipped element never counts as in view */}
                 <motion.div
                     ref={frameRef}
-                    initial={reduce ? false : "closed"}
+                    initial={reduce || first ? false : "closed"}
                     whileInView="open"
                     viewport={{ once: true, margin: "-15%" }}
                     className="relative aspect-[16/10]"
@@ -314,7 +326,13 @@ function MobileItem({ info, position, reduce }: { info: Info; position: number; 
                         transition={{ duration: 0.9, ease }}
                         className="absolute inset-0 bg-ink overflow-hidden"
                     >
-                        <LoopVideo poster={info.image} video={info.video} playing={playing} sizes="100vw" />
+                        <LoopVideo
+                            poster={info.image}
+                            video={info.video}
+                            playing={playing}
+                            sizes="(min-width: 768px) 75vw, calc(100vw - 2.5rem)"
+                            priority={first}
+                        />
                     </motion.div>
                 </motion.div>
                 <div className="mt-4 flex items-baseline justify-between font-display text-sm text-grey">

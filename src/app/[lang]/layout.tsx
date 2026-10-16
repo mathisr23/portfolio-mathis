@@ -19,13 +19,13 @@ const anybody = Anybody({
   axes: ["wdth"],
 });
 
-// Reading text
+// Reading text: one static weight keeps it light (the variable font is ~185 KB)
 const newsreader = Newsreader({
   variable: "--nf-text",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
 type Props = { params: Promise<{ lang: string }> };
@@ -52,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: lang === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },
+    twitter: { card: "summary_large_image" },
   };
 }
 

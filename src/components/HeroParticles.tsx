@@ -163,7 +163,10 @@ export default function HeroParticles({ targetRef, startDelay, onReady }: Props)
             camera.bottom = host.height;
             camera.updateProjectionMatrix();
 
-            const maxCount = host.width < 768 ? 6000 : 16000;
+            // Fewer particles on phones, and half again on low-power devices
+            const nav = navigator as Navigator & { deviceMemory?: number };
+            const lowPower = (nav.hardwareConcurrency ?? 8) <= 4 || (nav.deviceMemory ?? 8) <= 4;
+            const maxCount = (host.width < 768 ? 6000 : 16000) * (lowPower ? 0.5 : 1);
             const home = sampleHeading(heading, host, maxCount);
             const count = home.length / 2;
             const pos = new Float32Array(count * 3);
