@@ -24,7 +24,9 @@
     "reel": {
         "caseStudy": "Read the case study",
         "openSite": "Open the site",
-        "index": "All projects"
+        "index": "All projects",
+        "previous": "Previous",
+        "next": "Next"
     },
     "caseStudy": {
         "back": "All work",

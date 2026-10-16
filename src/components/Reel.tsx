@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import Link from "next/link";
 import {
+    animate,
     AnimatePresence,
     motion,
     useMotionValueEvent,
@@ -12,6 +13,7 @@ import {
     useTransform,
     useVelocity,
     useInView,
+    type MotionValue,
 } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -281,75 +283,168 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
     );
 }
 
+/**
+ * Phones get the reel sideways: native scroll-snap for the swipe, the centred card plays,
+ * and swipe speed squeezes the titles like scroll speed does on desktop.
+ */
 function MobileReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
+    const { t } = useLanguage();
+    const trackRef = useRef<HTMLOListElement>(null);
+    const cardRefs = useRef<(HTMLLIElement | null)[]>([]);
+    const [active, setActive] = useState(0);
+
+    // The active card is the one mostly visible inside the track
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        const io = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) setActive(Number((entry.target as HTMLElement).dataset.index));
+                }
+            },
+            { root: track, threshold: 0.6 }
+        );
+        cardRefs.current.forEach((card) => card && io.observe(card));
+        return () => io.disconnect();
+    }, []);
+
+    const { scrollX, scrollXProgress } = useScroll({ container: trackRef });
+    const velocity = useSpring(useVelocity(scrollX), { stiffness: 180, damping: 40 });
+    const width = useTransform(velocity, (v) => {
+        const amount = reduce ? 0 : Math.min(Math.abs(v) / 1800, 1);
+        return `"wdth" ${125 - amount * 55}`;
+    });
+
+    // One small nudge the first time the reel comes into view, to show it moves sideways
+    const inView = useInView(trackRef, { once: true, amount: 0.5 });
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!inView || reduce || !track) return;
+        const controls = animate(track, { x: [0, -36, 0] }, { duration: 1.1, ease, delay: 0.4 });
+        return () => controls.stop();
+    }, [inView, reduce]);
+
+    const goTo = (i: number) => {
+        const track = trackRef.current;
+        const card = cardRefs.current[i];
+        if (!track || !card) return;
+        // Cards snap to the track's 1.25rem side padding
+        track.scrollTo({ left: card.offsetLeft - 20, behavior: reduce ? "auto" : "smooth" });
+    };
+
     return (
-        <ol className="md:hidden px-5 pt-16 pb-8 flex flex-col gap-20">
-            {items.map((info, i) => (
-                <MobileItem key={info.title} info={info} position={i + 1} reduce={reduce} first={i === 0} />
-            ))}
-        </ol>
+        <div className="md:hidden pt-14 pb-10">
+            <div className="px-5 flex items-baseline justify-between font-display text-sm">
+                <p aria-live="polite" className="tabular-nums text-grey">
+                    <span className="text-ink">{active + 1}</span>/{count}
+                </p>
+                <div className="flex gap-5">
+                    <button
+                        type="button"
+                        onClick={() => goTo(active - 1)}
+                        disabled={active === 0}
+                        className="link-line disabled:opacity-30"
+                    >
+                        {t.reel.previous}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => goTo(active + 1)}
+                        disabled={active === count - 1}
+                        className="link-line disabled:opacity-30"
+                    >
+                        {t.reel.next}
+                    </button>
+                </div>
+            </div>
+
+            {/* data-lenis-prevent: smooth scroll must leave this horizontal scroller alone */}
+            <ol
+                ref={trackRef}
+                aria-label={t.reel.index}
+                data-lenis-prevent
+                className="relative mt-5 flex gap-4 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-px-5 px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+                {items.map((info, i) => (
+                    <li
+                        key={info.title}
+                        ref={(el) => {
+                            cardRefs.current[i] = el;
+                        }}
+                        data-index={i}
+                        aria-label={`${i + 1}/${count}`}
+                        className="snap-start shrink-0 w-[86%]"
+                    >
+                        <MobileCard info={info} active={i === active} first={i === 0} width={width} reduce={reduce} />
+                    </li>
+                ))}
+            </ol>
+
+            <div className="mx-5 mt-6 h-px bg-mist overflow-hidden" aria-hidden="true">
+                <motion.div className="h-full bg-ink origin-left" style={{ scaleX: scrollXProgress }} />
+            </div>
+        </div>
     );
 }
 
-function MobileItem({
+function MobileCard({
     info,
-    position,
-    reduce,
+    active,
     first,
+    width,
+    reduce,
 }: {
     info: Info;
-    position: number;
-    reduce: boolean;
-    /** Already on screen at load on phones: shown at once, it is the page's largest paint */
+    active: boolean;
+    /** On screen at load: it is the page's largest paint, so load it eagerly */
     first: boolean;
+    width: MotionValue<string>;
+    reduce: boolean;
 }) {
     const frameRef = useRef<HTMLDivElement>(null);
-    // Only the loop that is mostly on screen plays, so a phone never runs several at once
-    const playing = useInView(frameRef, { amount: 0.6 });
 
     return (
-        <li>
-            <ProjectLink info={info} frame={frameRef} className="block">
-                {/* Observe the unclipped wrapper: a fully clipped element never counts as in view */}
-                <motion.div
-                    ref={frameRef}
-                    initial={reduce || first ? false : "closed"}
-                    whileInView="open"
-                    viewport={{ once: true, margin: "-15%" }}
-                    className="relative aspect-[16/10]"
-                >
-                    <motion.div
-                        variants={{
-                            closed: { clipPath: "inset(50% 0% 50% 0%)" },
-                            open: { clipPath: "inset(0% 0% 0% 0%)" },
-                        }}
-                        transition={{ duration: 0.9, ease }}
-                        className="absolute inset-0 bg-ink overflow-hidden"
-                    >
-                        <LoopVideo
-                            poster={info.image}
-                            video={info.video}
-                            playing={playing}
-                            sizes="(min-width: 768px) 75vw, calc(100vw - 2.5rem)"
-                            priority={first}
-                        />
-                    </motion.div>
-                </motion.div>
-                <div className="mt-4 flex items-baseline justify-between font-display text-sm text-grey">
-                    <span className="italic font-text text-base">{info.meta}</span>
-                    <span className="tabular-nums">
-                        {position}/{count}
-                    </span>
-                </div>
-                <h3
-                    className="mt-1 font-display font-extrabold leading-[0.95] tracking-[-0.02em] whitespace-nowrap"
-                    style={{ fontSize: titleSize(info.title, "4.5rem"), fontVariationSettings: '"wdth" 125' }}
-                >
-                    {info.title}
-                </h3>
-                <p className="mt-3 text-lg leading-snug">{info.description}</p>
-                <span className="mt-3 inline-block font-display link-line">{info.cta}</span>
-            </ProjectLink>
-        </li>
+        <ProjectLink
+            info={info}
+            frame={frameRef}
+            className={`block transition-opacity duration-500 ${active ? "opacity-100" : "opacity-45"}`}
+        >
+            <div ref={frameRef} className="relative aspect-[16/10] bg-ink overflow-hidden">
+                <LoopVideo
+                    poster={info.image}
+                    video={info.video}
+                    playing={active}
+                    sizes="(min-width: 768px) 75vw, calc(100vw - 2.5rem)"
+                    priority={first}
+                />
+            </div>
+            <p className="mt-4 italic text-grey">{info.meta}</p>
+            <motion.h3
+                className="mt-1 font-display font-extrabold leading-[0.95] tracking-[-0.02em] whitespace-nowrap overflow-hidden"
+                style={{
+                    fontSize: `min(4.5rem, calc((86vw - 1rem) / ${Math.max(info.title.length, 6) * 0.98}))`,
+                    fontVariationSettings: width,
+                }}
+                aria-label={info.title}
+            >
+                {/* Re-keyed on activation so the letters flip in each time the card arrives */}
+                <span key={active ? "on" : "off"} className="block" aria-hidden="true">
+                    {Array.from(info.title).map((ch, i) => (
+                        <motion.span
+                            key={i}
+                            className="inline-block"
+                            initial={active && !reduce ? { y: "105%" } : false}
+                            animate={{ y: "0%" }}
+                            transition={{ duration: 0.55, ease, delay: i * 0.022 }}
+                        >
+                            {ch === " " ? " " : ch}
+                        </motion.span>
+                    ))}
+                </span>
+            </motion.h3>
+            <p className="mt-3 text-lg leading-snug">{info.description}</p>
+            <span className="mt-3 inline-block font-display link-line">{info.cta}</span>
+        </ProjectLink>
     );
 }

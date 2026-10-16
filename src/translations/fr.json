@@ -24,7 +24,9 @@
     "reel": {
         "caseStudy": "Lire l'étude de cas",
         "openSite": "Ouvrir le site",
-        "index": "Tous les projets"
+        "index": "Tous les projets",
+        "previous": "Précédent",
+        "next": "Suivant"
     },
     "caseStudy": {
         "back": "Tous les projets",
