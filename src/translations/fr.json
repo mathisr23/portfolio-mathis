@@ -37,7 +37,8 @@
         "visit": "Voir le site",
         "source": "Voir le code",
         "notLive": "Version en ligne bientôt disponible",
-        "next": "Projet suivant"
+        "next": "Projet suivant",
+        "challenge": "Le plus difficile"
     },
     "about": {
         "intro": "Je suis Mathis, développeur front-end basé en France. Je crée des sites qui se comportent plus comme des films que comme des documents : 3D pilotée au scroll, motion, et typographie qui réagit.",

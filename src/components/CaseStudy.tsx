@@ -122,6 +122,45 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
                 </ul>
             </section>
 
+            {project.challenge && (
+                <section
+                    className="px-5 md:px-10 pb-24 md:pb-36 grid lg:grid-cols-12 gap-8"
+                    aria-labelledby="challenge-heading"
+                >
+                    <h2 id="challenge-heading" className="lg:col-span-3 font-display text-grey">
+                        {t.caseStudy.challenge}
+                    </h2>
+                    <div className="lg:col-span-8 lg:col-start-5">
+                        <h3
+                            className="font-display font-extrabold text-3xl md:text-[2.6rem] leading-[1.05] tracking-[-0.02em] max-w-[22ch]"
+                            style={{ fontVariationSettings: '"wdth" 118' }}
+                        >
+                            {project.challenge.title[language]}
+                        </h3>
+                        {project.challenge.paragraphs.map((p) => (
+                            <p key={p.en} className="mt-6 text-xl md:text-[1.35rem] leading-[1.55] max-w-[60ch]">
+                                {p[language]}
+                            </p>
+                        ))}
+                        {project.challenge.code && (
+                            <figure className="mt-10">
+                                <pre className="bg-ink text-snow/90 p-5 md:p-7 overflow-x-auto text-[0.82rem] md:text-sm leading-relaxed font-mono">
+                                    <code>{project.challenge.code.snippet}</code>
+                                </pre>
+                                <figcaption className="mt-3 italic text-grey">
+                                    {project.challenge.code.caption[language]}
+                                </figcaption>
+                            </figure>
+                        )}
+                        {project.challenge.next && (
+                            <p className="mt-10 border-l-2 border-ink pl-5 italic text-xl md:text-[1.35rem] leading-[1.5] max-w-[56ch]">
+                                {project.challenge.next[language]}
+                            </p>
+                        )}
+                    </div>
+                </section>
+            )}
+
             {project.gallery.length > 0 && (
                 <section className="px-5 md:px-10 pb-24 md:pb-36 flex flex-col gap-8 md:gap-12" aria-label={project.title}>
                     {project.gallery.map((src) => (

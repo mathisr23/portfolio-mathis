@@ -20,6 +20,17 @@ export interface FeaturedProject {
     role: Localized;
     overview: Localized;
     highlights: { title: Localized; body: Localized }[];
+    /** The hardest problem, told plainly */
+    challenge?: Challenge;
+}
+
+export interface Challenge {
+    title: Localized;
+    paragraphs: Localized[];
+    /** A short excerpt, simplified from the project's source */
+    code?: { snippet: string; caption: Localized };
+    /** What is still unfinished, or what I would do differently */
+    next?: Localized;
 }
 
 export interface LabProject {
@@ -55,6 +66,39 @@ export const featuredProjects: FeaturedProject[] = [
         overview: {
             en: "Inspired by the ink-silhouette edits that circulate on TikTok, Aetherius is a single continuous shot: one camera travels a corridor of fog, and every section of the site is a station along the way. Scroll drives the camera, a collision sequence and a tracking shot through the studio's disciplines, with a soundtrack and a voiceover for each chapter.",
             fr: "Inspiré des edits en silhouettes à l'encre qui circulent sur TikTok, Aetherius est un plan-séquence : une caméra traverse un couloir de brume, et chaque section du site est une station sur le trajet. Le scroll pilote la caméra, une séquence de collision et un travelling à travers les disciplines du studio, avec une bande-son et une voix off pour chaque chapitre.",
+        },
+        challenge: {
+            title: { en: "Keeping camera, content and voice in sync", fr: "Synchroniser caméra, contenu et voix" },
+            paragraphs: [
+                {
+                    en: "The hardest part was alignment. The camera moves with the scroll, the text lives in the page, and a narrator names each section as you enter it. Early on they drifted apart: the camera arrived before the text, or the voice started while you were still scrolling past.",
+                    fr: "Le plus dur, c'était l'alignement. La caméra avance avec le scroll, le texte vit dans la page, et une voix annonce chaque section quand on y entre. Au début, tout se décalait : la caméra arrivait avant le texte, ou la voix partait alors qu'on était encore en train de défiler.",
+                },
+                {
+                    en: "The fix was to stop driving the camera by scroll percentage. Each section declares a station on the camera path; the page measures where those sections actually sit and maps the scroll between them, so the camera follows the layout instead of guessing it. Some sections hold the camera still while you read, and everything is measured again once the fonts load and on resize. The narrator waits until you have settled in a section before speaking, and the music steps back while she does.",
+                    fr: "La solution : arrêter de piloter la caméra au pourcentage de scroll. Chaque section déclare une station sur le trajet de la caméra ; la page mesure où ces sections se trouvent réellement et répartit le scroll entre elles, si bien que la caméra suit la mise en page au lieu de la deviner. Certaines sections figent la caméra le temps de la lecture, et tout est remesuré au chargement des polices et au redimensionnement. La voix attend que l'on soit posé dans une section pour parler, et la musique s'efface pendant ce temps.",
+                },
+            ],
+            code: {
+                caption: { en: "Simplified from the Aetherius source.", fr: "Simplifié depuis le code d'Aetherius." },
+                snippet: `// Each section is a station on the camera path.
+// Measure where it really is, then map the scroll between stations.
+const anchors = sections.flatMap((el) => {
+  const top = el.getBoundingClientRect().top + scrollY;
+  const station = Number(el.dataset.station);
+  const span = Math.max(0, el.offsetHeight - innerHeight);
+  return el.dataset.anchor === "hold"
+    ? [{ y: top, station }, { y: top + span, station }] // camera holds while you read
+    : [{ y: top + span / 2, station }];
+});
+
+// The narrator speaks once you have settled, never while flying past.
+const id = setTimeout(() => sound.say(VOICE[chapter]), 650);`,
+            },
+            next: {
+                en: "The 3D is not where I want it yet, and I'm still working on it.",
+                fr: "La 3D n'est pas encore là où je la veux, et je continue de la travailler.",
+            },
         },
         highlights: [
             {
@@ -101,6 +145,19 @@ export const featuredProjects: FeaturedProject[] = [
         overview: {
             en: "Nocturne was an excuse to try something new: take a brand promise, \"compute that takes the shape of your workload\", and turn it into an object. A chrome form morphs and drifts through the page as you scroll, carrying the story from hero to pricing.",
             fr: "Nocturne était un prétexte pour essayer quelque chose de nouveau : prendre une promesse de marque, « du compute qui prend la forme de votre charge », et en faire un objet. Une forme chromée se déforme et voyage à travers la page au fil du scroll, du hero jusqu'aux tarifs.",
+        },
+        challenge: {
+            title: { en: "Heavy images on a scroll-driven page", fr: "Des images lourdes sur une page pilotée au scroll" },
+            paragraphs: [
+                {
+                    en: "Nocturne was me trying something new, and most of it went smoothly. The one recurring problem was weight: the large images were heavy, and sometimes didn't appear in time while scrolling, leaving a gap where the next scene should have been.",
+                    fr: "Nocturne, c'était moi qui essayais quelque chose de nouveau, et la plupart du temps tout s'est bien passé. Le seul problème récurrent, c'était le poids : les grandes images étaient lourdes, et n'apparaissaient parfois pas à temps pendant le scroll, laissant un vide là où la scène suivante aurait dû être.",
+                },
+            ],
+            next: {
+                en: "Next time I'd treat images as part of the performance budget from day one: compressed, sized for the screen, and loaded before the scroll reaches them.",
+                fr: "La prochaine fois, je traiterai les images comme une partie du budget de performance dès le premier jour : compressées, dimensionnées pour l'écran, et chargées avant que le scroll ne les atteigne.",
+            },
         },
         highlights: [
             {
@@ -193,6 +250,19 @@ export const featuredProjects: FeaturedProject[] = [
         overview: {
             en: "A real client with a real business: Léa needed a site that feels as handmade as her ceramics, and that turns visitors into students for her initiation workshops and classes.",
             fr: "Une vraie cliente avec une vraie activité : Léa avait besoin d'un site aussi artisanal que ses céramiques, qui transforme les visiteurs en élèves pour ses initiations et ses cours.",
+        },
+        challenge: {
+            title: { en: "Building for a real client", fr: "Travailler pour une vraie cliente" },
+            paragraphs: [
+                {
+                    en: "The challenge wasn't one technical problem, it was the back-and-forth. Every request from Léa meant a change, and every change could bring a bug that neither of us noticed, until someone trying to book a workshop ran into it.",
+                    fr: "Le défi n'était pas un problème technique, c'était l'aller-retour. Chaque demande de Léa impliquait un changement, et chaque changement pouvait amener un bug que ni elle ni moi ne voyions, jusqu'à ce qu'une personne essayant de réserver un atelier tombe dessus.",
+                },
+            ],
+            next: {
+                en: "It changed what \"done\" means to me: a feature is finished when the people using the site can't break it, not when it works on my screen.",
+                fr: "Ça a changé ma définition de « terminé » : une fonctionnalité est finie quand les personnes qui utilisent le site ne peuvent plus la casser, pas quand elle marche sur mon écran.",
+            },
         },
         highlights: [
             {

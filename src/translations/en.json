@@ -37,7 +37,8 @@
         "visit": "Visit live site",
         "source": "View source",
         "notLive": "Live version coming soon",
-        "next": "Next project"
+        "next": "Next project",
+        "challenge": "The hard part"
     },
     "about": {
         "intro": "I'm Mathis, a front-end developer based in France. I build websites that behave more like films than documents: scroll-driven 3D, motion, and type that reacts to you.",
