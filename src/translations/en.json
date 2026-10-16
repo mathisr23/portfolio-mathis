@@ -5,7 +5,9 @@
         "contact": "Contact",
         "label": "Main",
         "language": "Language",
-        "switchTo": "Passer en français"
+        "switchTo": "Passer en français",
+        "menu": "Menu",
+        "close": "Close"
     },
     "hero": {
         "statement": "I build cinematic, scroll-driven web experiences: 3D, motion and interfaces that feel alive.",

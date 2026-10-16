@@ -2,14 +2,17 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Reel from "@/components/Reel";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 
 export default function Home() {
   return (
-    <main>
-      <Navbar />
-      <Hero />
-      <Reel />
-      <Footer />
-    </main>
+    <PageTransition>
+      <main>
+        <Navbar />
+        <Hero />
+        <Reel />
+        <Footer />
+      </main>
+    </PageTransition>
   );
 }

@@ -22,6 +22,12 @@ function resetOnReload() {
     window.scrollTo(0, 0);
 }
 
+/** Jump to the top at once, keeping the smooth-scroll state in sync */
+export function resetScroll() {
+    if (instance) instance.scrollTo(0, { immediate: true, force: true });
+    else window.scrollTo(0, 0);
+}
+
 export default function SmoothScroll() {
     useEffect(() => {
         resetOnReload();

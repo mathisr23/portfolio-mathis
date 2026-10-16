@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
@@ -8,6 +9,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { featuredProjects, type FeaturedProject } from "@/data/projects";
 import StretchText from "@/components/StretchText";
 import LoopVideo from "@/components/LoopVideo";
+import { FRAME_NAME } from "@/lib/frame-transition";
+import { resetScroll } from "@/components/SmoothScroll";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const MotionLink = motion.create(Link);
@@ -15,6 +18,13 @@ const MotionLink = motion.create(Link);
 export default function CaseStudy({ project }: { project: FeaturedProject }) {
     const { t, language, href } = useLanguage();
     const reduce = useReducedMotion() ?? false;
+
+    // Arriving from the reel, the page must be at the top before the view transition
+    // captures it, otherwise the cover morphs to the wrong place and then jumps.
+    // Layout effects run inside that commit; a regular effect would be too late.
+    useLayoutEffect(() => {
+        resetScroll();
+    }, [project.slug]);
 
     const index = featuredProjects.findIndex((p) => p.slug === project.slug);
     const next = featuredProjects[(index + 1) % featuredProjects.length];
@@ -69,22 +79,20 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
                 </div>
             </header>
 
-            {/* Cover opens through the same slit as the reel */}
-            <motion.div
-                initial={reduce ? false : { clipPath: "inset(50% 0% 50% 0%)" }}
-                animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                transition={{ duration: 1.2, delay: 0.5, ease }}
+            {/* Same name as a clicked reel frame: arriving from the reel, the frame morphs into this cover */}
+            <div
                 className="relative mt-16 md:mt-24 mx-5 md:mx-10 aspect-[16/10] bg-ink overflow-hidden"
+                style={{ viewTransitionName: FRAME_NAME }}
             >
                 <LoopVideo
                     poster={project.cover}
                     video={project.video}
                     playing
                     priority
-                    sizes="100vw"
+                    sizes="(min-width: 768px) calc(100vw - 5rem), calc(100vw - 2.5rem)"
                     alt={`${project.title}: ${project.tagline[language]}`}
                 />
-            </motion.div>
+            </div>
 
             <section className="px-5 md:px-10 py-24 md:py-36 grid lg:grid-cols-12 gap-8" aria-labelledby="overview-heading">
                 <h2 id="overview-heading" className="lg:col-span-3 font-display text-grey">

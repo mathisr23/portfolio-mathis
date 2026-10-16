@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type RefObject } from "react";
 import Link from "next/link";
 import {
     AnimatePresence,
@@ -18,6 +18,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { reel, type ReelItem } from "@/data/projects";
 import { scrollToY } from "@/components/SmoothScroll";
 import LoopVideo from "@/components/LoopVideo";
+import { markFrame } from "@/lib/frame-transition";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const count = reel.length;
@@ -39,6 +40,7 @@ function describe(item: ReelItem, t: T, language: "en" | "fr", href: (p: string)
             cta: t.reel.caseStudy,
             to: href(`/work/${p.slug}`),
             external: false,
+            slug: p.slug as string | undefined,
         };
     }
     const p = item.project;
@@ -51,17 +53,36 @@ function describe(item: ReelItem, t: T, language: "en" | "fr", href: (p: string)
         cta: t.reel.openSite,
         to: p.link,
         external: true,
+        slug: undefined,
     };
 }
 
 type Info = ReturnType<typeof describe>;
 
+
 /** Size giant titles by their length so the longest one still fits the frame width */
 const titleSize = (title: string, max: string) =>
     `min(${max}, calc((100vw - 4rem) / ${Math.max(title.length, 6) * 0.98}))`;
 
-function ProjectLink({ info, className, children }: { info: Info; className?: string; children: React.ReactNode }) {
-    const onClick = () => track("Project Clicked", { title: info.title });
+/**
+ * Link to a project. For case studies, the frame (`frame`, or the link itself) is named
+ * at click time so it morphs into the case study cover.
+ */
+function ProjectLink({
+    info,
+    className,
+    children,
+    frame,
+}: {
+    info: Info;
+    className?: string;
+    children: React.ReactNode;
+    frame?: RefObject<HTMLElement | null>;
+}) {
+    const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        track("Project Clicked", { title: info.title });
+        if (!info.external) markFrame(frame ? frame.current : e.currentTarget);
+    };
     if (info.external) {
         return (
             <a href={info.to} target="_blank" rel="noopener noreferrer" onClick={onClick} className={className}>
@@ -94,6 +115,7 @@ export default function Reel() {
 
 function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
     const { t } = useLanguage();
+    const stageRef = useRef<HTMLDivElement>(null);
     const sectionRef = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
 
@@ -139,42 +161,46 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
                 </div>
 
                 <div className="mt-4 flex-1 min-h-0 grid grid-cols-12 gap-8">
-                    {/* Frame: the next project opens through a slit over the last one */}
+                    {/* Frame: the next project opens through a slit over the last one,
+                        and morphs into the case study cover when clicked */}
                     <ProjectLink
                         info={info}
+                        frame={stageRef}
                         className="col-span-9 relative h-full min-h-0 bg-ink overflow-hidden block"
                     >
                         <span className="sr-only">{`${info.title}, ${info.cta}`}</span>
-                        <AnimatePresence initial={false}>
-                            <motion.div
-                                key={index}
-                                className="absolute inset-0"
-                                initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
-                                animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                                exit={{ scale: 1.04 }}
-                                transition={swap}
-                            >
+                        <div ref={stageRef} className="absolute inset-0">
+                            <AnimatePresence initial={false}>
                                 <motion.div
+                                    key={index}
                                     className="absolute inset-0"
-                                    initial={{ scale: reduce ? 1 : 1.12 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ duration: reduce ? 0 : 1.6, ease }}
+                                    initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
+                                    animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+                                    exit={{ scale: 1.04 }}
+                                    transition={swap}
                                 >
-                                    <LoopVideo
-                                        poster={info.image}
-                                        video={info.video}
-                                        playing
-                                        sizes="75vw"
-                                        priority={index === 0}
-                                    />
+                                    <motion.div
+                                        className="absolute inset-0"
+                                        initial={{ scale: reduce ? 1 : 1.12 }}
+                                        animate={{ scale: 1 }}
+                                        transition={{ duration: reduce ? 0 : 1.6, ease }}
+                                    >
+                                        <LoopVideo
+                                            poster={info.image}
+                                            video={info.video}
+                                            playing
+                                            sizes="75vw"
+                                            priority={index === 0}
+                                        />
+                                    </motion.div>
                                 </motion.div>
-                            </motion.div>
-                        </AnimatePresence>
-                        {/* Calm, dark band where the title overlaps, so the inverted title always reads */}
-                        <span
-                            aria-hidden="true"
-                            className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-ink/85 via-ink/40 to-transparent"
-                        />
+                            </AnimatePresence>
+                            {/* Calm, dark band where the title overlaps, so the inverted title always reads */}
+                            <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-ink/85 via-ink/40 to-transparent"
+                            />
+                        </div>
                     </ProjectLink>
 
                     {/* Index of the whole reel */}
@@ -244,7 +270,7 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
                     >
                         <p className="col-span-3 italic text-grey text-lg">{info.meta}</p>
                         <p className="col-span-6 text-xl leading-snug max-w-[46ch]">{info.description}</p>
-                        <ProjectLink info={info} className="col-span-3 font-display text-base justify-self-start">
+                        <ProjectLink info={info} frame={stageRef} className="col-span-3 font-display text-base justify-self-start">
                             <span className="link-line">{info.cta}</span>
                         </ProjectLink>
                     </motion.div>
@@ -271,7 +297,7 @@ function MobileItem({ info, position, reduce }: { info: Info; position: number; 
 
     return (
         <li>
-            <ProjectLink info={info} className="block">
+            <ProjectLink info={info} frame={frameRef} className="block">
                 {/* Observe the unclipped wrapper: a fully clipped element never counts as in view */}
                 <motion.div
                     ref={frameRef}

@@ -5,6 +5,7 @@ import CaseStudy from "@/components/CaseStudy";
 import Footer from "@/components/Footer";
 import { featuredProjects, getFeaturedProject } from "@/data/projects";
 import { alternatesFor, isLocale } from "@/lib/i18n";
+import PageTransition from "@/components/PageTransition";
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
@@ -37,12 +38,14 @@ export default async function WorkPage({ params }: Props) {
     if (!project) notFound();
 
     return (
-        <main className="relative min-h-screen">
-            <div className="relative z-10">
-                <Navbar />
-                <CaseStudy project={project} />
-                <Footer />
-            </div>
-        </main>
+        <PageTransition>
+            <main className="relative min-h-screen">
+                <div className="relative z-10">
+                    <Navbar />
+                    <CaseStudy project={project} />
+                    <Footer />
+                </div>
+            </main>
+        </PageTransition>
     );
 }

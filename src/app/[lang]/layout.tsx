@@ -67,7 +67,7 @@ export default async function RootLayout({
   const t = lang === "fr" ? fr : en;
 
   return (
-    <html lang={lang}>
+    <html lang={lang} data-scroll-behavior="smooth">
       <body
         className={`${anybody.variable} ${newsreader.variable} antialiased`}
       >

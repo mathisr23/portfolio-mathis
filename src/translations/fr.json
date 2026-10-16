@@ -5,7 +5,9 @@
         "contact": "Contact",
         "label": "Principale",
         "language": "Langue",
-        "switchTo": "Switch to English"
+        "switchTo": "Switch to English",
+        "menu": "Menu",
+        "close": "Fermer"
     },
     "hero": {
         "statement": "Je crée des expériences web cinématiques pilotées au scroll : 3D, motion et interfaces vivantes.",

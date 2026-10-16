@@ -105,3 +105,38 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ===== PAGE TRANSITIONS ===== */
+/* The nav is identical on every page: keep it still instead of cross-fading */
+.site-nav {
+  view-transition-name: site-nav;
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease);
+}
+
+/* Reel frame -> case study cover (name set by src/lib/frame-transition.ts) */
+::view-transition-group(project-frame) {
+  animation-duration: 0.8s;
+  animation-timing-function: var(--ease);
+}
+
+/* Frames have different proportions on each page: crop instead of squashing */
+::view-transition-old(project-frame),
+::view-transition-new(project-frame) {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

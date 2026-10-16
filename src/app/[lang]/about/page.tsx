@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { alternatesFor, isLocale } from "@/lib/i18n";
 import en from "@/translations/en.json";
 import fr from "@/translations/fr.json";
+import PageTransition from "@/components/PageTransition";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -15,10 +16,12 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default function AboutPage() {
     return (
-        <main>
-            <Navbar />
-            <About />
-            <Footer />
-        </main>
+        <PageTransition>
+            <main>
+                <Navbar />
+                <About />
+                <Footer />
+            </main>
+        </PageTransition>
     );
 }

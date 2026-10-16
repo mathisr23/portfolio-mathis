@@ -155,6 +155,9 @@ export default function HeroParticles({ targetRef, startDelay, onReady }: Props)
 
         const build = () => {
             const host = container.getBoundingClientRect();
+            // Hidden (e.g. the page kept mounted behind a case study): nothing to sample yet,
+            // the resize observer rebuilds once it is visible again
+            if (host.width < 1 || host.height < 1) return;
             renderer.setSize(host.width, host.height, false);
             camera.right = host.width;
             camera.bottom = host.height;

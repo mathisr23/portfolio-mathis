@@ -37,7 +37,7 @@ export default function Hero() {
         <section
             id="main-content"
             data-nav-tone="snow"
-            className="relative min-h-[88svh] flex flex-col justify-end bg-signal text-snow px-5 md:px-10 pb-8 md:pb-10 pt-28 overflow-hidden"
+            className="relative md:min-h-[88svh] flex flex-col justify-end bg-signal text-snow px-5 md:px-10 pb-12 md:pb-10 pt-40 md:pt-28 overflow-hidden"
             aria-labelledby="hero-heading"
         >
             {/* Particle name — decorative layer over the real h1 */}
