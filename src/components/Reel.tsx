@@ -21,6 +21,8 @@ import LoopVideo from "@/components/LoopVideo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const count = reel.length;
+/** Scroll distance per project, in svh: long enough to feel each frame, short enough to skim */
+const STEP_SVH = 70;
 
 type T = ReturnType<typeof useLanguage>["t"];
 
@@ -124,7 +126,7 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
     const swap = { duration: reduce ? 0 : 0.9, ease };
 
     return (
-        <div ref={sectionRef} className="hidden md:block relative" style={{ height: `${count * 90}svh` }}>
+        <div ref={sectionRef} className="hidden md:block relative" style={{ height: `${count * STEP_SVH}svh` }}>
             <div className="sticky top-0 h-[100svh] overflow-hidden bg-paper px-10 pt-20 pb-8 flex flex-col">
                 {/* Position in the reel */}
                 <div className="flex items-baseline justify-between font-display text-sm text-grey">
@@ -168,6 +170,11 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
                                 </motion.div>
                             </motion.div>
                         </AnimatePresence>
+                        {/* Calm, dark band where the title overlaps, so the inverted title always reads */}
+                        <span
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-ink/85 via-ink/40 to-transparent"
+                        />
                     </ProjectLink>
 
                     {/* Index of the whole reel */}

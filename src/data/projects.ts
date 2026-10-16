@@ -43,7 +43,7 @@ export const featuredProjects: FeaturedProject[] = [
         cover: "/work/video/aetherius-poster.webp",
         video: "/work/video/aetherius",
         gallery: [],
-        links: { source: "https://github.com/mathisr23/aetherius" },
+        links: { live: "https://aetherius-exp.vercel.app/", source: "https://github.com/mathisr23/aetherius" },
         tagline: {
             en: "A monochrome, scroll-driven showreel for a fictional immersive production house.",
             fr: "Un showreel monochrome piloté au scroll pour une maison de production immersive fictive.",
@@ -249,7 +249,8 @@ export const labProjects: LabProject[] = [
         title: "MoodTime",
         label: { en: "Ambient web app", fr: "Application d'ambiance" },
         stack: ["React", "TypeScript"],
-        image: "/work/moodtime-cover.webp",
+        image: "/work/video/moodtime-poster.webp",
+        video: "/work/video/moodtime",
         link: "https://mood-time-alpha.vercel.app/",
         description: {
             en: "An ambient mood player: pick a scene, from a campfire or rain to space or a night train, and let full-screen video and sound fill the room.",
