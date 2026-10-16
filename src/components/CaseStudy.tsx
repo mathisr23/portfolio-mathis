@@ -7,6 +7,7 @@ import { track } from "@vercel/analytics";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { featuredProjects, type FeaturedProject } from "@/data/projects";
 import StretchText from "@/components/StretchText";
+import LoopVideo from "@/components/LoopVideo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const MotionLink = motion.create(Link);
@@ -75,13 +76,13 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
                 transition={{ duration: 1.2, delay: 0.5, ease }}
                 className="relative mt-16 md:mt-24 mx-5 md:mx-10 aspect-[16/10] bg-ink overflow-hidden"
             >
-                <Image
-                    src={project.cover}
-                    alt={`${project.title}: ${project.tagline[language]}`}
-                    fill
+                <LoopVideo
+                    poster={project.cover}
+                    video={project.video}
+                    playing
                     priority
                     sizes="100vw"
-                    className="object-cover object-top"
+                    alt={`${project.title}: ${project.tagline[language]}`}
                 />
             </motion.div>
 

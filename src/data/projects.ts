@@ -12,6 +12,8 @@ export interface FeaturedProject {
     year: string;
     stack: string[];
     cover: string;
+    /** Base path of a muted loop: <video>.mp4, <video>.webm (cover is its first frame) */
+    video?: string;
     gallery: string[];
     links: { live?: string; source?: string };
     tagline: Localized;
@@ -26,6 +28,7 @@ export interface LabProject {
     label: Localized;
     stack: string[];
     image: string;
+    video?: string;
     link: string;
     description: Localized;
 }
@@ -37,7 +40,8 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "concept",
         year: "2026",
         stack: ["React", "TypeScript", "Three.js", "GSAP", "Lenis"],
-        cover: "/work/aetherius-cover.webp",
+        cover: "/work/video/aetherius-poster.webp",
+        video: "/work/video/aetherius",
         gallery: [],
         links: { source: "https://github.com/mathisr23/aetherius" },
         tagline: {
@@ -82,7 +86,8 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "concept",
         year: "2026",
         stack: ["Vite", "Three.js", "Lenis"],
-        cover: "/work/nocturne-cover.webp",
+        cover: "/work/video/nocturne-poster.webp",
+        video: "/work/video/nocturne",
         gallery: [],
         links: { live: "https://nocturne-landing-teal.vercel.app/" },
         tagline: {
@@ -127,7 +132,8 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "experiment",
         year: "2026",
         stack: ["Angular", "Three.js", "GSAP"],
-        cover: "/work/museum500-cover.webp",
+        cover: "/work/video/museum-of-500-poster.webp",
+        video: "/work/video/museum-of-500",
         gallery: [],
         links: { live: "https://museum500.vercel.app/" },
         tagline: {
@@ -172,7 +178,8 @@ export const featuredProjects: FeaturedProject[] = [
         kind: "client",
         year: "2026",
         stack: ["Next.js", "TypeScript", "Tailwind"],
-        cover: "/work/atelierlvy-cover.webp",
+        cover: "/work/video/atelier-lvy-poster.webp",
+        video: "/work/video/atelier-lvy",
         gallery: [],
         links: { live: "https://www.atelierlvy.com/" },
         tagline: {
@@ -218,7 +225,8 @@ export const labProjects: LabProject[] = [
         title: "RNG Reliques",
         label: { en: "Browser game", fr: "Jeu navigateur" },
         stack: ["Vite", "Three.js"],
-        image: "/work/rng-reliques-cover.webp",
+        image: "/work/video/rng-reliques-poster.webp",
+        video: "/work/video/rng-reliques",
         link: "https://rng-reliques.vercel.app/",
         description: {
             en: "A luck-based collecting game in 3D: roll dice, reveal relics across 8 rarity tiers, build an idle economy. Played by friends.",
@@ -229,7 +237,8 @@ export const labProjects: LabProject[] = [
         title: "Still Looking",
         label: { en: "Personal chronicle", fr: "Chronique personnelle" },
         stack: ["Next.js", "GSAP"],
-        image: "/work/still-looking-cover.webp",
+        image: "/work/video/still-looking-poster.webp",
+        video: "/work/video/still-looking",
         link: "https://still-looking.vercel.app/",
         description: {
             en: "My chronicle of the first-job search, a personal look at what junior developers go through today.",
@@ -237,25 +246,14 @@ export const labProjects: LabProject[] = [
         },
     },
     {
-        title: "PokéGacha",
-        label: { en: "Browser game", fr: "Jeu navigateur" },
-        stack: ["React", "Vite"],
-        image: "/work/pokegacha-cover.webp",
-        link: "https://poke-gacha-ui.vercel.app/",
+        title: "MoodTime",
+        label: { en: "Ambient web app", fr: "Application d'ambiance" },
+        stack: ["React", "TypeScript"],
+        image: "/work/moodtime-cover.webp",
+        link: "https://mood-time-alpha.vercel.app/",
         description: {
-            en: "A Pokémon gacha game where you collect and discover random Pokémon.",
-            fr: "Un jeu gacha Pokémon où vous collectionnez et découvrez des Pokémon aléatoires.",
-        },
-    },
-    {
-        title: "UnemployedCountup",
-        label: { en: "Satire", fr: "Satire" },
-        stack: ["HTML", "CSS", "JavaScript"],
-        image: "/work/unemployed-countup-cover.webp",
-        link: "https://unemployed-countup.vercel.app/",
-        description: {
-            en: "A satirical timer counting the seconds since unemployment, made with dark humour.",
-            fr: "Un timer satirique comptant les secondes de chômage, avec un humour noir assumé.",
+            en: "An ambient mood player: pick a scene, from a campfire or rain to space or a night train, and let full-screen video and sound fill the room.",
+            fr: "Un lecteur d'ambiances : choisissez une scène, d'un feu de camp ou la pluie à l'espace ou un train de nuit, et laissez l'image et le son remplir la pièce.",
         },
     },
 ];
@@ -272,8 +270,7 @@ const reelOrder = [
     "Museum of 500",
     "Atelier Lvy",
     "Still Looking",
-    "PokéGacha",
-    "UnemployedCountup",
+    "MoodTime",
 ];
 
 export const reel: ReelItem[] = reelOrder.map((title) => {

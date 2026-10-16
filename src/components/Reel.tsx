@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
     AnimatePresence,
     motion,
@@ -12,11 +11,13 @@ import {
     useSpring,
     useTransform,
     useVelocity,
+    useInView,
 } from "framer-motion";
 import { track } from "@vercel/analytics";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { reel, type ReelItem } from "@/data/projects";
 import { scrollToY } from "@/components/SmoothScroll";
+import LoopVideo from "@/components/LoopVideo";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const count = reel.length;
@@ -30,6 +31,7 @@ function describe(item: ReelItem, t: T, language: "en" | "fr", href: (p: string)
         return {
             title: p.title,
             image: p.cover,
+            video: p.video,
             meta: `${t.work.kinds[p.kind]}, ${p.year}`,
             description: p.tagline[language],
             cta: t.reel.caseStudy,
@@ -41,6 +43,7 @@ function describe(item: ReelItem, t: T, language: "en" | "fr", href: (p: string)
     return {
         title: p.title,
         image: p.image,
+        video: p.video,
         meta: p.label[language],
         description: p.description[language],
         cta: t.reel.openSite,
@@ -155,12 +158,11 @@ function DesktopReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
                                     animate={{ scale: 1 }}
                                     transition={{ duration: reduce ? 0 : 1.6, ease }}
                                 >
-                                    <Image
-                                        src={info.image}
-                                        alt=""
-                                        fill
+                                    <LoopVideo
+                                        poster={info.image}
+                                        video={info.video}
+                                        playing
                                         sizes="75vw"
-                                        className="object-cover object-top"
                                         priority={index === 0}
                                     />
                                 </motion.div>
@@ -249,43 +251,54 @@ function MobileReel({ items, reduce }: { items: Info[]; reduce: boolean }) {
     return (
         <ol className="md:hidden px-5 pt-16 pb-8 flex flex-col gap-20">
             {items.map((info, i) => (
-                <li key={info.title}>
-                    <ProjectLink info={info} className="block">
-                        {/* Observe the unclipped wrapper: a fully clipped element never counts as in view */}
-                        <motion.div
-                            initial={reduce ? false : "closed"}
-                            whileInView="open"
-                            viewport={{ once: true, margin: "-15%" }}
-                            className="relative aspect-[16/10]"
-                        >
-                            <motion.div
-                                variants={{
-                                    closed: { clipPath: "inset(50% 0% 50% 0%)" },
-                                    open: { clipPath: "inset(0% 0% 0% 0%)" },
-                                }}
-                                transition={{ duration: 0.9, ease }}
-                                className="absolute inset-0 bg-ink overflow-hidden"
-                            >
-                                <Image src={info.image} alt="" fill sizes="100vw" className="object-cover object-top" />
-                            </motion.div>
-                        </motion.div>
-                        <div className="mt-4 flex items-baseline justify-between font-display text-sm text-grey">
-                            <span className="italic font-text text-base">{info.meta}</span>
-                            <span className="tabular-nums">
-                                {i + 1}/{count}
-                            </span>
-                        </div>
-                        <h3
-                            className="mt-1 font-display font-extrabold leading-[0.95] tracking-[-0.02em] whitespace-nowrap"
-                            style={{ fontSize: titleSize(info.title, "4.5rem"), fontVariationSettings: '"wdth" 125' }}
-                        >
-                            {info.title}
-                        </h3>
-                        <p className="mt-3 text-lg leading-snug">{info.description}</p>
-                        <span className="mt-3 inline-block font-display link-line">{info.cta}</span>
-                    </ProjectLink>
-                </li>
+                <MobileItem key={info.title} info={info} position={i + 1} reduce={reduce} />
             ))}
         </ol>
+    );
+}
+
+function MobileItem({ info, position, reduce }: { info: Info; position: number; reduce: boolean }) {
+    const frameRef = useRef<HTMLDivElement>(null);
+    // Only the loop that is mostly on screen plays, so a phone never runs several at once
+    const playing = useInView(frameRef, { amount: 0.6 });
+
+    return (
+        <li>
+            <ProjectLink info={info} className="block">
+                {/* Observe the unclipped wrapper: a fully clipped element never counts as in view */}
+                <motion.div
+                    ref={frameRef}
+                    initial={reduce ? false : "closed"}
+                    whileInView="open"
+                    viewport={{ once: true, margin: "-15%" }}
+                    className="relative aspect-[16/10]"
+                >
+                    <motion.div
+                        variants={{
+                            closed: { clipPath: "inset(50% 0% 50% 0%)" },
+                            open: { clipPath: "inset(0% 0% 0% 0%)" },
+                        }}
+                        transition={{ duration: 0.9, ease }}
+                        className="absolute inset-0 bg-ink overflow-hidden"
+                    >
+                        <LoopVideo poster={info.image} video={info.video} playing={playing} sizes="100vw" />
+                    </motion.div>
+                </motion.div>
+                <div className="mt-4 flex items-baseline justify-between font-display text-sm text-grey">
+                    <span className="italic font-text text-base">{info.meta}</span>
+                    <span className="tabular-nums">
+                        {position}/{count}
+                    </span>
+                </div>
+                <h3
+                    className="mt-1 font-display font-extrabold leading-[0.95] tracking-[-0.02em] whitespace-nowrap"
+                    style={{ fontSize: titleSize(info.title, "4.5rem"), fontVariationSettings: '"wdth" 125' }}
+                >
+                    {info.title}
+                </h3>
+                <p className="mt-3 text-lg leading-snug">{info.description}</p>
+                <span className="mt-3 inline-block font-display link-line">{info.cta}</span>
+            </ProjectLink>
+        </li>
     );
 }

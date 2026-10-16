@@ -11,8 +11,20 @@ export function scrollToY(y: number) {
     else window.scrollTo({ top: y, behavior: "smooth" });
 }
 
+/** A reload starts from the top of the page instead of wherever the browser left it */
+function resetOnReload() {
+    const [nav] = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+    if (nav?.type !== "reload") return;
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (window.location.hash) {
+        history.replaceState(history.state, "", window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+}
+
 export default function SmoothScroll() {
     useEffect(() => {
+        resetOnReload();
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
         const lenis = new Lenis({
