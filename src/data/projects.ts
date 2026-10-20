@@ -316,15 +316,14 @@ export const labProjects: LabProject[] = [
         },
     },
     {
-        title: "MoodTime",
-        label: { en: "Ambient web app", fr: "Application d'ambiance" },
-        stack: ["React", "TypeScript"],
-        image: "/work/video/moodtime-poster.webp",
-        video: "/work/video/moodtime",
-        link: "https://mood-time-alpha.vercel.app/",
+        title: "Mnemosyne",
+        label: { en: "Browser puzzle game", fr: "Jeu d'enquête navigateur" },
+        stack: ["React", "TypeScript", "Web Audio"],
+        image: "/work/video/mnemosyne-poster.webp",
+        link: "https://mnemosyneui.vercel.app/",
         description: {
-            en: "An ambient mood player: pick a scene, from a campfire or rain to space or a night train, and let full-screen video and sound fill the room.",
-            fr: "Un lecteur d'ambiances : choisissez une scène, d'un feu de camp ou la pluie à l'espace ou un train de nuit, et laissez l'image et le son remplir la pièce.",
+            en: "An almost empty page and forty locks. The dismantled workstation of a missing systems architect: every secret you find rebuilds a piece of the interface.",
+            fr: "Une page presque vide et quarante serrures. Le poste démonté d'un architecte système disparu : chaque secret trouvé reconstruit un morceau de l'interface.",
         },
     },
 ];
@@ -341,7 +340,7 @@ const reelOrder = [
     "Museum of 500",
     "Atelier Lvy",
     "Still Looking",
-    "MoodTime",
+    "Mnemosyne",
 ];
 
 export const reel: ReelItem[] = reelOrder.map((title) => {
