@@ -317,22 +317,10 @@ const id = setTimeout(() => sound.say(VOICE[chapter]), 650);`,
                     fr: "Le plus dur, ça a été le test. Quarante serrures, c'est quarante fonctionnalités qui écoutent chacune une action du joueur, et chacune doit s'ouvrir au bon moment, jamais par accident. J'ai testé chaque serrure moi-même, mais je prenais toujours le chemin que j'avais conçu.",
                 },
                 {
-                    en: "So I had friends play it. They thought differently, tried things in an order I had never imagined, and uncovered bugs I had never run into. One lock watched the browser's zoom level and took the lowest value it had ever seen as 100 %: a friend zoomed out, came back to normal, and the game read it as a 200 % zoom and opened the lock. Another one opened on its own while printing, because the browser briefly switches colour scheme while it prepares the page. Each round of feedback meant a fix, then another round.",
-                    fr: "Alors je l'ai fait tester à des amis. Ils réfléchissaient autrement, essayaient des choses dans un ordre que je n'avais jamais imaginé, et ont débloqué des bugs que je n'avais jamais rencontrés. Une serrure surveillait le zoom du navigateur et prenait la plus petite valeur jamais vue comme référence de 100 % : un ami a dézoomé, est revenu à la normale, et le jeu y a lu un zoom à 200 % et a ouvert la serrure. Une autre s'ouvrait toute seule à l'impression, parce que le navigateur change brièvement de thème de couleur pendant qu'il prépare la page. Chaque retour donnait une correction, puis un nouveau tour de test.",
+                    en: "So I had friends play it. They thought differently, tried things in an order I had never imagined, and uncovered bugs I had never run into. Some locks opened on their own after an innocent sequence of actions; others stayed shut when the player had done exactly the right thing, just not in the way I had pictured. Each round of feedback meant a fix, then another round.",
+                    fr: "Alors je l'ai fait tester à des amis. Ils réfléchissaient autrement, essayaient des choses dans un ordre que je n'avais jamais imaginé, et ont débloqué des bugs que je n'avais jamais rencontrés. Certaines serrures s'ouvraient toutes seules après une suite d'actions anodines ; d'autres restaient fermées alors que le joueur avait fait exactement ce qu'il fallait, mais pas de la façon dont je l'avais imaginé. Chaque retour donnait une correction, puis un nouveau tour de test.",
                 },
             ],
-            code: {
-                caption: { en: "Simplified from the Mnemosyne source.", fr: "Simplifié depuis le code de Mnemosyne." },
-                snippet: `// The player's 100 % zoom: recorded on the first visit, never lowered.
-// The first version kept the lowest value ever seen, so zooming out
-// moved the reference and coming back to 100 % read as a x2 zoom.
-function dprBase() {
-  const stored = Number(localStorage.getItem(DPR_BASE_KEY));
-  if (stored > 0) return stored;
-  localStorage.setItem(DPR_BASE_KEY, String(devicePixelRatio));
-  return devicePixelRatio;
-}`,
-            },
             next: {
                 en: "There are surely still bugs in there. But every playtest found some, and every fix came from someone who did not play the way I expected.",
                 fr: "Il en reste sûrement encore. Mais chaque session de test en a fait sortir, et chaque correction est venue de quelqu'un qui ne jouait pas comme je l'avais prévu.",
