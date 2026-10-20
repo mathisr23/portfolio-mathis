@@ -36,7 +36,9 @@ export default function CaseStudy({ project }: { project: FeaturedProject }) {
         { label: t.caseStudy.stack, value: project.stack.join(", ") },
     ];
 
-    const titleSize = `min(12rem, calc((100vw - 3rem) / ${Math.max(project.title.length, 6) * 0.8}))`;
+    // At this width M and W take far more room than the average letter, so they count for more
+    const titleUnits = project.title.length + 0.7 * (project.title.match(/[mw]/gi)?.length ?? 0);
+    const titleSize = `min(12rem, calc((100vw - 3rem) / ${Math.max(titleUnits, 6) * 0.8}))`;
 
     return (
         <article id="main-content">

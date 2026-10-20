@@ -288,6 +288,80 @@ const id = setTimeout(() => sound.say(VOICE[chapter]), 650);`,
             },
         ],
     },
+    {
+        slug: "mnemosyne",
+        title: "Mnemosyne",
+        kind: "experiment",
+        year: "2026",
+        stack: ["React", "TypeScript", "Tailwind", "Web Audio"],
+        cover: "/work/video/mnemosyne-poster.webp",
+        gallery: [],
+        links: { live: "https://mnemosyneui.vercel.app/" },
+        tagline: {
+            en: "A browser puzzle game that starts as an almost empty page. Forty locks, and every secret you find rebuilds a piece of the interface.",
+            fr: "Un jeu d'enquête dans le navigateur qui commence par une page presque vide. Quarante serrures, et chaque secret trouvé reconstruit un morceau de l'interface.",
+        },
+        role: {
+            en: "Concept, writing, design & development",
+            fr: "Concept, écriture, design & développement",
+        },
+        overview: {
+            en: "K., a systems architect at the Léthé Institute, built a machine that stores interfaces instead of files, then dismantled his own workstation into forty locks and disappeared. You arrive on what is left: a title, a clock and a link. The preview looks like a broken site on purpose. The game only starts once you go looking.",
+            fr: "K., architecte système à l'Institut Léthé, a conçu une machine qui stocke des interfaces plutôt que des fichiers, puis a démonté son propre poste en quarante serrures avant de disparaître. On arrive sur ce qu'il en reste : un titre, une horloge et un lien. L'aperçu ressemble exprès à un site cassé. Le jeu ne commence qu'à partir du moment où l'on se met à chercher.",
+        },
+        challenge: {
+            title: { en: "Bugs I could not find alone", fr: "Les bugs que je ne trouvais pas seul" },
+            paragraphs: [
+                {
+                    en: "The hardest part was testing. Forty locks means forty features, each listening for something the player does, and each one has to open at the right moment and never by accident. I tested every lock myself, but I always took the path I had designed.",
+                    fr: "Le plus dur, ça a été le test. Quarante serrures, c'est quarante fonctionnalités qui écoutent chacune une action du joueur, et chacune doit s'ouvrir au bon moment, jamais par accident. J'ai testé chaque serrure moi-même, mais je prenais toujours le chemin que j'avais conçu.",
+                },
+                {
+                    en: "So I had friends play it. They thought differently, tried things in an order I had never imagined, and uncovered bugs I had never run into. One lock watched the browser's zoom level and took the lowest value it had ever seen as 100 %: a friend zoomed out, came back to normal, and the game read it as a 200 % zoom and opened the lock. Another one opened on its own while printing, because the browser briefly switches colour scheme while it prepares the page. Each round of feedback meant a fix, then another round.",
+                    fr: "Alors je l'ai fait tester à des amis. Ils réfléchissaient autrement, essayaient des choses dans un ordre que je n'avais jamais imaginé, et ont débloqué des bugs que je n'avais jamais rencontrés. Une serrure surveillait le zoom du navigateur et prenait la plus petite valeur jamais vue comme référence de 100 % : un ami a dézoomé, est revenu à la normale, et le jeu y a lu un zoom à 200 % et a ouvert la serrure. Une autre s'ouvrait toute seule à l'impression, parce que le navigateur change brièvement de thème de couleur pendant qu'il prépare la page. Chaque retour donnait une correction, puis un nouveau tour de test.",
+                },
+            ],
+            code: {
+                caption: { en: "Simplified from the Mnemosyne source.", fr: "Simplifié depuis le code de Mnemosyne." },
+                snippet: `// The player's 100 % zoom: recorded on the first visit, never lowered.
+// The first version kept the lowest value ever seen, so zooming out
+// moved the reference and coming back to 100 % read as a x2 zoom.
+function dprBase() {
+  const stored = Number(localStorage.getItem(DPR_BASE_KEY));
+  if (stored > 0) return stored;
+  localStorage.setItem(DPR_BASE_KEY, String(devicePixelRatio));
+  return devicePixelRatio;
+}`,
+            },
+            next: {
+                en: "There are surely still bugs in there. But every playtest found some, and every fix came from someone who did not play the way I expected.",
+                fr: "Il en reste sûrement encore. Mais chaque session de test en a fait sortir, et chaque correction est venue de quelqu'un qui ne jouait pas comme je l'avais prévu.",
+            },
+        },
+        highlights: [
+            {
+                title: { en: "A page that rebuilds itself", fr: "Une page qui se reconstruit" },
+                body: {
+                    en: "The site starts with no visible stylesheet: Times, black on white, a blue underlined link. Each solved lock restores a layer, typography, ink, grid, motion, until the workstation is whole again.",
+                    fr: "Le site démarre sans feuille de style apparente : du Times, noir sur blanc, un lien bleu souligné. Chaque serrure résolue restaure une couche, typographie, encre, trame, mouvement, jusqu'à ce que le poste soit de nouveau entier.",
+                },
+            },
+            {
+                title: { en: "The whole browser is the board", fr: "Tout le navigateur est le plateau" },
+                body: {
+                    en: "The locks do not stay on the page. Some react to the window, the tabs or the DevTools, so the game teaches you where to look as it goes.",
+                    fr: "Les serrures ne restent pas sur la page. Certaines réagissent à la fenêtre, aux onglets ou aux DevTools, et le jeu apprend au fur et à mesure où regarder.",
+                },
+            },
+            {
+                title: { en: "Hard, but fair", fr: "Difficile, mais juste" },
+                body: {
+                    en: "No timer, one hint per lock that points the way without giving the answer, and everything you need is inside the game. No API, no backend: sound is synthesised with Web Audio and progress is saved in the browser.",
+                    fr: "Pas de chronomètre, un seul indice par serrure qui oriente sans donner la réponse, et tout ce qu'il faut est dans le jeu. Aucune API, aucun backend : le son est synthétisé en Web Audio et la progression est sauvegardée dans le navigateur.",
+                },
+            },
+        ],
+    },
 ];
 
 export const labProjects: LabProject[] = [
@@ -313,17 +387,6 @@ export const labProjects: LabProject[] = [
         description: {
             en: "My chronicle of the first-job search, a personal look at what junior developers go through today.",
             fr: "Ma chronique de la recherche d'un premier emploi, un regard personnel sur ce que vivent les développeurs juniors aujourd'hui.",
-        },
-    },
-    {
-        title: "Mnemosyne",
-        label: { en: "Browser puzzle game", fr: "Jeu d'enquête navigateur" },
-        stack: ["React", "TypeScript", "Web Audio"],
-        image: "/work/video/mnemosyne-poster.webp",
-        link: "https://mnemosyneui.vercel.app/",
-        description: {
-            en: "An almost empty page and forty locks. The dismantled workstation of a missing systems architect: every secret you find rebuilds a piece of the interface.",
-            fr: "Une page presque vide et quarante serrures. Le poste démonté d'un architecte système disparu : chaque secret trouvé reconstruit un morceau de l'interface.",
         },
     },
 ];
